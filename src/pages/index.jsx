@@ -21,12 +21,16 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" />
-      <Img fluid={headerImage.image.childImageSharp.fluid} alt="header image" />
-      <nav>
-        <ul>
-          <li>Articles</li>
-          <li>Snippets</li>
-          <li>Projects</li>
+      <Img
+        style={{ width: "50%", margin: "auto" }}
+        fluid={headerImage.image.childImageSharp.fluid}
+        alt="header image"
+      />
+      <nav className={"nav"}>
+        <ul className={"nav__list"}>
+          <li className={"nav__item"}>Articles</li>
+          <li className={"nav__item"}>Snippets</li>
+          <li className={"nav__item"}>Projects</li>
         </ul>
       </nav>
       <div></div>
