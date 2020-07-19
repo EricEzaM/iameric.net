@@ -1,5 +1,5 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 
 import Layout from "../components/layout"
@@ -111,6 +111,11 @@ const IndexPage = () => {
             </div>
           </div>
         ))}
+        <div className={"card-container__footer"}>
+          <Link className={"card-container__button"} to="/">
+            See All
+          </Link>
+        </div>
       </section>
       {/* Snippets */}
       <section

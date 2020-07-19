@@ -8,9 +8,16 @@ html {
     "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+$g-color-primary: #307ee4;
+
+$g-color-grey-900: #222222;
+$g-color-grey-700: #555555;
+$g-color-grey-500: #888888;
+$g-color-grey-300: #bbbbbb;
+$g-color-grey-100: hsl(0, 0%, 94%);
+
 .nav {
   font-size: 1.5rem;
-
   &__list {
     display: flex;
     flex-direction: row;
@@ -33,13 +40,13 @@ html {
     &::after {
       display: block;
       content: "";
-      border-bottom: solid 2px lightgray;
+      border-bottom: solid 2px #d3d3d3;
       transform: scaleX(0);
       transition: all 250ms ease-out;
     }
 
     &:hover {
-      color: rgb(19, 19, 19);
+      color: $g-color-grey-900;
       &::after {
         transform: scaleX(1);
       }
@@ -51,8 +58,17 @@ $breakpoint: 768px;
 
 .card {
   border-radius: 5px;
-  background: lightgray;
+  background: $g-color-grey-100;
   flex: 0 0 32%;
+
+  // Give some transition to box shadow and scale on hover
+  box-shadow: -1px 1px 5px $g-color-grey-300;
+  transition: box-shadow 250ms ease-in-out, transform 250ms ease-in-out;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: -2px 2px 10px $g-color-grey-300;
+  }
 
   // Used to ensure flex of 33.33% works with "padded" look of inner content
   &__content {
@@ -78,6 +94,8 @@ $breakpoint: 768px;
     display: flex;
   }
 
+  // Transition animations for tab switching
+  // Logic of application of these classes controlled from JS
   &.appearing {
     animation: appearing;
     animation-duration: 400ms;
@@ -97,26 +115,50 @@ $breakpoint: 768px;
       margin-bottom: 1rem;
     }
   }
-}
 
-@keyframes appearing {
-  0% {
-    transform: translateX(-15px);
-    opacity: 0%;
+  @keyframes appearing {
+    0% {
+      transform: translateX(-15px);
+      opacity: 0%;
+    }
+    100% {
+      transform: translateX(0px);
+      opacity: 100%;
+    }
   }
-  100% {
-    transform: translateX(0px);
-    opacity: 100%;
-  }
-}
 
-@keyframes disappearing {
-  0% {
-    transform: translateX(0px);
-    opacity: 100%;
+  @keyframes disappearing {
+    0% {
+      transform: translateX(0px);
+      opacity: 100%;
+    }
+    100% {
+      transform: translateX(-15px);
+      opacity: 0%;
+    }
   }
-  100% {
-    transform: translateX(-15px);
-    opacity: 0%;
+
+  &__footer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+  }
+
+  &__button {
+    color: $g-color-grey-100;
+    text-decoration: none;
+    background-color: $g-color-primary;
+    padding: 5px 30px;
+    border-radius: 5px;
+    font-weight: 500;
+
+    box-shadow: -1px 1px 5px $g-color-grey-300;
+
+    transition: all 250ms ease-in-out;
+
+    &:hover {
+      background-color: #6330e4;
+    }
   }
 }
