@@ -47,7 +47,7 @@ $breakpoint: 768px;
 
 .card {
   border-radius: 5px;
-  background: grey;
+  background: lightgray;
   flex: 0 0 32%;
 
   // Used to ensure flex of 33.33% works with "padded" look of inner content
@@ -63,17 +63,27 @@ $breakpoint: 768px;
 }
 
 .card-container {
-  display: flex;
+  display: none;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
   margin: 1rem 0;
+  height: auto;
 
-  transition: all 200ms ease-in-out;
+  &.is-active {
+    display: flex;
+  }
 
-  &:hover {
-    transform: translateX(-100px);
-    opacity: 0%;
+  &.appearing {
+    animation: appearing;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+  }
+
+  &.disappearing {
+    animation: disappearing;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
   }
 
   @media (max-width: $breakpoint) {
@@ -82,5 +92,27 @@ $breakpoint: 768px;
     & > :not(:last-child) {
       margin-bottom: 1rem;
     }
+  }
+}
+
+@keyframes appearing {
+  0% {
+    transform: translateX(-15px);
+    opacity: 0%;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 100%;
+  }
+}
+
+@keyframes disappearing {
+  0% {
+    transform: translateX(0px);
+    opacity: 100%;
+  }
+  100% {
+    transform: translateX(-15px);
+    opacity: 0%;
   }
 }

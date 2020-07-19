@@ -4,6 +4,13 @@ import Img from "gatsby-image"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { useState } from "react"
+
+const sections = {
+  ARTICLES: 0,
+  SNIPPETS: 1,
+  PROJECTS: 2,
+}
 
 const IndexPage = () => {
   const headerImage = useStaticQuery(graphql`
@@ -18,6 +25,24 @@ const IndexPage = () => {
     }
   `)
 
+  const [activeSection, setActiveSection] = useState(sections.ARTICLES)
+  const [disappearingSection, setDisappearingSection] = useState(-1)
+  const [appearingSection, setAppearingSection] = useState(-1)
+
+  function onNavClick(section) {
+    if (section !== activeSection) {
+      setDisappearingSection(activeSection)
+      setAppearingSection(section)
+    }
+  }
+
+  function onAnimationEnd(animEvent) {
+    if (animEvent.animationName === "appearing") {
+    } else if (animEvent.animationName === "disappearing") {
+      setActiveSection(appearingSection)
+    }
+  }
+
   return (
     <Layout>
       <SEO title="Home" />
@@ -28,12 +53,36 @@ const IndexPage = () => {
       />
       <nav className={"nav"}>
         <ul className={"nav__list"}>
-          <li className={"nav__item"}>Articles</li>
-          <li className={"nav__item"}>Snippets</li>
-          <li className={"nav__item"}>Projects</li>
+          <li
+            className={"nav__item"}
+            onClick={() => onNavClick(sections.ARTICLES)}
+          >
+            Articles
+          </li>
+          <li
+            className={"nav__item"}
+            onClick={() => onNavClick(sections.SNIPPETS)}
+          >
+            Snippets
+          </li>
+          <li
+            className={"nav__item"}
+            onClick={() => onNavClick(sections.PROJECTS)}
+          >
+            Projects
+          </li>
         </ul>
       </nav>
-      <section className={"card-container"}>
+      {/* Articles */}
+      <section
+        className={[
+          "card-container",
+          activeSection === sections.ARTICLES ? "is-active" : null,
+          appearingSection === sections.ARTICLES ? "appearing" : null,
+          disappearingSection === sections.ARTICLES ? "disappearing" : null,
+        ].join(" ")}
+        onAnimationEnd={animEvent => onAnimationEnd(animEvent)}
+      >
         {[1, 2, 3].map(() => (
           <div className={"card"}>
             <div className={"card__content"}>
@@ -41,7 +90,7 @@ const IndexPage = () => {
                 className={"card__image"}
                 src="https://source.unsplash.com/random/200x200"
               ></img>
-              <h3 className={"card__title"}>Title</h3>
+              <h3 className={"card__title"}>Articles</h3>
               <div className={"card__body"}>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil
                 obcaecati adipisci inventore nulla vero perferendis dolorem
@@ -52,7 +101,34 @@ const IndexPage = () => {
           </div>
         ))}
       </section>
-      <div></div>
+      {/* Snippets */}
+      <section
+        className={[
+          "card-container",
+          activeSection === sections.SNIPPETS ? "is-active" : null,
+          appearingSection === sections.SNIPPETS ? "appearing" : null,
+          disappearingSection === sections.SNIPPETS ? "disappearing" : null,
+        ].join(" ")}
+        onAnimationEnd={animEvent => onAnimationEnd(animEvent)}
+      >
+        {[1, 2, 3].map(() => (
+          <div className={"card"}>
+            <div className={"card__content"}>
+              <img
+                className={"card__image"}
+                src="https://source.unsplash.com/random/200x200"
+              ></img>
+              <h3 className={"card__title"}>Snippets</h3>
+              <div className={"card__body"}>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil
+                obcaecati adipisci inventore nulla vero perferendis dolorem
+                provident reprehenderit minima. Facere quos sit fugiat mollitia
+                magni minima quasi optio minus delectus!
+              </div>
+            </div>
+          </div>
+        ))}
+      </section>
     </Layout>
   )
 }
