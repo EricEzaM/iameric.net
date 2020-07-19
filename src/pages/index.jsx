@@ -38,8 +38,10 @@ const IndexPage = () => {
 
   function onAnimationEnd(animEvent) {
     if (animEvent.animationName === "appearing") {
+      setAppearingSection(-1)
     } else if (animEvent.animationName === "disappearing") {
       setActiveSection(appearingSection)
+      setDisappearingSection(-1)
     }
   }
 
@@ -54,19 +56,28 @@ const IndexPage = () => {
       <nav className={"nav"}>
         <ul className={"nav__list"}>
           <li
-            className={"nav__item"}
+            className={[
+              "nav__item",
+              activeSection === sections.ARTICLES ? "is-active" : null,
+            ].join(" ")}
             onClick={() => onNavClick(sections.ARTICLES)}
           >
             Articles
           </li>
           <li
-            className={"nav__item"}
+            className={[
+              "nav__item",
+              activeSection === sections.SNIPPETS ? "is-active" : null,
+            ].join(" ")}
             onClick={() => onNavClick(sections.SNIPPETS)}
           >
             Snippets
           </li>
           <li
-            className={"nav__item"}
+            className={[
+              "nav__item",
+              activeSection === sections.PROJECTS ? "is-active" : null,
+            ].join(" ")}
             onClick={() => onNavClick(sections.PROJECTS)}
           >
             Projects

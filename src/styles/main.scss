@@ -22,8 +22,12 @@ html {
   &__item {
     padding: 0 20px;
     cursor: pointer;
-    color: grey;
+    color: #999999;
     transition: color 250ms ease-out;
+
+    &.is-active {
+      color: #307ee4;
+    }
 
     // Underline animation on hover
     &::after {
@@ -76,13 +80,13 @@ $breakpoint: 768px;
 
   &.appearing {
     animation: appearing;
-    animation-duration: 500ms;
+    animation-duration: 400ms;
     animation-fill-mode: forwards;
   }
 
   &.disappearing {
     animation: disappearing;
-    animation-duration: 500ms;
+    animation-duration: 400ms;
     animation-fill-mode: forwards;
   }
 
