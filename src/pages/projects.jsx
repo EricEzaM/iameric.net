@@ -3,13 +3,13 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const IndexPage = () => {
+const ProjectsPage = () => {
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Projects" />
       <div>Hello!</div>
     </Layout>
   )
 }
 
-export default IndexPage
+export default ProjectsPage
