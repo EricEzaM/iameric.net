@@ -8,7 +8,13 @@ html {
     "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 $g-color-primary: #307ee4;
+$g-color-secondary: #6330e4;
 
 $g-color-grey-900: #222222;
 $g-color-grey-700: #555555;
@@ -38,6 +44,10 @@ $g-color-grey-100: hsl(0, 0%, 94%);
       text-decoration: none;
     }
 
+    & > .is-active {
+      color: $g-color-primary;
+    }
+
     // Underline animation on hover
     &::after {
       display: block;
@@ -61,62 +71,54 @@ $g-color-grey-100: hsl(0, 0%, 94%);
 $breakpoint: 768px;
 
 .card {
-  border-radius: 5px;
-  background: $g-color-grey-100;
-  flex: 0 0 100%;
-  margin-bottom: 1rem;
+  display: flex;
+  flex-flow: column wrap;
 
-  // Give some transition to box shadow and scale on hover
-  box-shadow: -1px 1px 5px $g-color-grey-300;
-  transition: box-shadow 250ms ease-in-out, transform 250ms ease-in-out;
+  padding: 1rem;
+  border-radius: 10px;
+  background: $g-color-grey-100;
+
+  box-shadow: 0px 0px 5px $g-color-grey-300;
+  transition: box-shadow 250ms ease-in-out;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: -2px 2px 10px $g-color-grey-300;
+    box-shadow: 0px 0px 10px $g-color-grey-300;
   }
 
-  // Used to ensure flex of 33.33% works with "padded" look of inner content
-  &__content {
-    margin: 1rem;
+  &__title {
+    padding: 5px 0;
+  }
+
+  &__body {
+    font-size: small;
+  }
+
+  &__image {
+    width: 100%;
+    border-radius: 5px;
+    height: auto;
+  }
+
+  &__meta {
+    margin-top: auto;
+    padding-top: 1rem;
   }
 }
 
+.tag {
+  padding: 0 4px;
+  text-decoration: none;
+  color: $g-color-secondary;
+  font-weight: bold;
+}
+
 .card-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  height: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 1rem;
+  column-gap: 1rem;
 
   @media (max-width: $breakpoint) {
-    flex-direction: column;
-    // Maintain spacing when in flex is column
-    & > :not(:last-child) {
-      margin-bottom: 1rem;
-    }
-  }
-
-  &__footer {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 1rem;
-  }
-
-  &__button {
-    color: $g-color-grey-100;
-    text-decoration: none;
-    background-color: $g-color-primary;
-    padding: 5px 30px;
-    border-radius: 5px;
-    font-weight: 500;
-
-    box-shadow: -1px 1px 5px $g-color-grey-300;
-
-    transition: all 250ms ease-in-out;
-
-    &:hover {
-      background-color: #6330e4;
-    }
+    grid-template-columns: 1fr 1fr;
   }
 }
