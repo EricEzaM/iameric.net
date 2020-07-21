@@ -26,7 +26,7 @@ const Nav = () => {
       </Link>
 
       <ul className="nav__list">
-        {["Articles", "Snippets", "Projects", "About"].map(e => (
+        {["Articles", "Nuggets", "Projects", "About"].map(e => (
           <li className="nav__item">
             <Link activeClassName="is-active" to={`/${e.toLowerCase()}`}>
               {e}
