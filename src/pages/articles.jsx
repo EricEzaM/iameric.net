@@ -1,18 +1,40 @@
-import React from "react"
+import React, { useState } from "react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { Link } from "gatsby"
+import { Link, graphql, useStaticQuery } from "gatsby"
+import { useEffect } from "react"
 
 const ArticlesPage = () => {
+  const { articles, tags } = useStaticQuery(query)
+
+  const [filterTerm, setFilterTerm] = useState("")
+  const [displayedArticles, setDisplayedArticles] = useState(articles.edges)
+
+  useEffect(() => {
+    let filteredArticles = articles.edges.filter(({ article }) => {
+      return article.frontmatter.title
+        .toLowerCase()
+        .includes(filterTerm.toLowerCase())
+    })
+
+    setDisplayedArticles(filteredArticles)
+  }, [filterTerm, articles])
+
   return (
     <Layout>
       <SEO title="Articles" />
+      <input
+        type="text"
+        placeholder="Keyword Search"
+        value={filterTerm}
+        onChange={e => setFilterTerm(e.target.value)}
+      />
       <section className="card-container">
-        {[1, 2, 3, 4, 5, 6].map(e => (
-          <div key={e} className={"card"}>
+        {displayedArticles.map(({ article: a }) => (
+          <div key={a.id} className={"card"}>
             <div className={"card__content"}>
-              <Link to={"/" + e.toString()}>
+              <Link to={"/" + a.slug}>
                 <img
                   className={"card__image"}
                   width="500"
@@ -20,13 +42,8 @@ const ArticlesPage = () => {
                   src="https://source.unsplash.com/random/500x250"
                   alt="image"
                 ></img>
-                <h3 className={"card__title"}>Big long article title</h3>
-                <div className={"card__body"}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil
-                  obcaecati adipisci inventore nulla vero perferendis dolorem
-                  provident reprehenderit minima. Facere quos sit fugiat
-                  mollitia magni minima quasi optio minus delectus!
-                </div>
+                <h3 className={"card__title"}>{a.frontmatter.title}</h3>
+                <div className={"card__body"}>{a.excerpt}</div>
               </Link>
             </div>
             <div className="card__meta">
@@ -49,3 +66,32 @@ const ArticlesPage = () => {
 }
 
 export default ArticlesPage
+
+const query = graphql`
+  query {
+    articles: allMarkdownRemark(
+      sort: { fields: frontmatter___date, order: DESC }
+      filter: { frontmatter: { template: { eq: "post" } } }
+    ) {
+      edges {
+        article: node {
+          id
+          frontmatter {
+            title
+            template
+            tags
+            slug
+            date
+          }
+          excerpt(pruneLength: 200)
+        }
+      }
+    }
+    tags: allMarkdownRemark {
+      group(field: frontmatter___tags) {
+        fieldValue
+        totalCount
+      }
+    }
+  }
+`
