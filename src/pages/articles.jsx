@@ -48,12 +48,12 @@ const ArticlesPage = () => {
             </div>
             <div className="card__meta">
               <span>
-                {["Godot", "C#"].map((e, i, a) => (
+                {a.frontmatter.tags.map((e, i, arr) => (
                   <React.Fragment key={i}>
                     <Link className="tag" to={"/tags/" + e.toLowerCase()}>
                       {e}
                     </Link>
-                    {i !== a.length - 1 && "/"}
+                    {i !== arr.length - 1 && <span> / </span>}
                   </React.Fragment>
                 ))}
               </span>
