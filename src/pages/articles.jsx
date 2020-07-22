@@ -34,7 +34,7 @@ const ArticlesPage = () => {
         {displayedArticles.map(({ article: a }) => (
           <div key={a.id} className={"card"}>
             <div className={"card__content"}>
-              <Link to={"/" + a.slug}>
+              <Link to={"/" + a.frontmatter.slug}>
                 <img
                   className={"card__image"}
                   width="500"
