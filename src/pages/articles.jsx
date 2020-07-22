@@ -10,7 +10,7 @@ const ArticlesPage = () => {
       <SEO title="Articles" />
       <section className="card-container">
         {[1, 2, 3, 4, 5, 6].map(e => (
-          <div className={"card"}>
+          <div key={e} className={"card"}>
             <div className={"card__content"}>
               <Link to={"/" + e.toString()}>
                 <img
@@ -32,12 +32,12 @@ const ArticlesPage = () => {
             <div className="card__meta">
               <span>
                 {["Godot", "C#"].map((e, i, a) => (
-                  <>
+                  <React.Fragment key={i}>
                     <Link className="tag" to={"/tags/" + e.toLowerCase()}>
                       {e}
                     </Link>
                     {i !== a.length - 1 && "/"}
-                  </>
+                  </React.Fragment>
                 ))}
               </span>
             </div>

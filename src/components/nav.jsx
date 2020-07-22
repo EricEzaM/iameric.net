@@ -21,13 +21,13 @@ const Nav = () => {
         <Img
           style={{ width: "40%", margin: "auto" }}
           fluid={headerImage.image.childImageSharp.fluid}
-          alt="header image"
+          alt="header"
         />
       </Link>
 
       <ul className="nav__list">
         {["Articles", "Snippets", "Projects", "About"].map(e => (
-          <li className="nav__item">
+          <li key={e.toLowerCase()} className="nav__item">
             <Link activeClassName="is-active" to={`/${e.toLowerCase()}`}>
               {e}
             </Link>
