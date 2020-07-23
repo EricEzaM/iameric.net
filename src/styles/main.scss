@@ -106,9 +106,18 @@ $breakpoint: 768px;
 }
 
 .tag {
+  display: inline-block;
   text-decoration: none;
   color: $g-color-secondary;
   font-weight: bold;
+
+  transition: color 250ms ease-in-out, transform 50ms ease-out;
+
+  &:hover{
+    color: darken($g-color-secondary, 30%);
+    transform: translateY(-1px);
+    // box-shadow: -1px -1px 2px $g-color-grey-300;
+  }
 }
 
 .card-container {
