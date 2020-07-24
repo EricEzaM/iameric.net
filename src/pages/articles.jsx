@@ -27,48 +27,13 @@ const items = [
     id: 5,
     value: "Art",
   },
-  {
-    id: 6,
-    value: "C#",
-  },
-  {
-    id: 7,
-    value: "C#",
-  },
-  {
-    id: 8,
-    value: "C#",
-  },
-  {
-    id: 9,
-    value: "C#",
-  },
-  {
-    id: 10,
-    value: "C#",
-  },
-  {
-    id: 11,
-    value: "C#",
-  },
-  {
-    id: 12,
-    value: "C#",
-  },
-  {
-    id: 13,
-    value: "C#",
-  },
-  {
-    id: 14,
-    value: "C#",
-  },
 ]
 
 const ArticlesPage = () => {
   const { articles, tags } = useStaticQuery(query)
 
   const [filterTerm, setFilterTerm] = useState("")
+  const [filterTags, setFilterTags] = useState([])
   const [displayedArticles, setDisplayedArticles] = useState(articles.edges)
 
   function handleSelectedTagsChange(items) {}
@@ -86,18 +51,21 @@ const ArticlesPage = () => {
   return (
     <Layout>
       <SEO title="Articles" />
-      <input
-        type="text"
-        placeholder="Keyword Search"
-        value={filterTerm}
-        onChange={e => setFilterTerm(e.target.value)}
-      />
-      <Dropdown
-        title="Filter by tags..."
-        items={items}
-        multiselect={true}
-        onSelectionChanged={handleSelectedTagsChange}
-      ></Dropdown>
+      <section className="articles-filters">
+        <input
+          className="searchbox"
+          type="text"
+          placeholder="Keyword Search"
+          value={filterTerm}
+          onChange={e => setFilterTerm(e.target.value)}
+        />
+        <Dropdown
+          title="Filter by tags..."
+          items={items}
+          multiselect={true}
+          onSelectionChanged={handleSelectedTagsChange}
+        ></Dropdown>
+      </section>
       <section className="card-container">
         {displayedArticles.map(({ article: a }) => (
           <div key={a.id} className={"card"}>
