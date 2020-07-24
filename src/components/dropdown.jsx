@@ -38,10 +38,8 @@ const Dropdown = ({ title, items, multiselect = false }) => {
 
   return (
     <div className="dd-wrapper">
-      <div
-        tabIndex={0}
+      <button
         className={["dd-header", !open ? "dd-header--closed" : ""].join(" ")}
-        role="button"
         onKeyPress={() => toggle(!open)}
         onClick={() => toggle(!open)}
       >
@@ -55,7 +53,7 @@ const Dropdown = ({ title, items, multiselect = false }) => {
         <div className="dd-header__action">
           <p>{open ? "Close" : "Open"}</p>
         </div>
-      </div>
+      </button>
       {open && (
         <ul className="dd-list">
           {items.map((item, idx) => (
