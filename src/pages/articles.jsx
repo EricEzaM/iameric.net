@@ -6,31 +6,14 @@ import { Link, graphql, useStaticQuery } from "gatsby"
 import { useEffect } from "react"
 import Dropdown from "../components/dropdown"
 
-const items = [
-  {
-    id: 1,
-    value: "Godot",
-  },
-  {
-    id: 2,
-    value: "GameDev",
-  },
-  {
-    id: 3,
-    value: "C#",
-  },
-  {
-    id: 4,
-    value: "UE4",
-  },
-  {
-    id: 5,
-    value: "Art",
-  },
-]
-
 const ArticlesPage = () => {
   const { articles, tags } = useStaticQuery(query)
+
+  const realTags = tags.group.map((tag, idx) => ({
+    id: idx,
+    value: tag.fieldValue,
+    count: tag.totalCount,
+  }))
 
   const [filterTerm, setFilterTerm] = useState("")
   const [filterTags, setFilterTags] = useState([])
@@ -61,7 +44,7 @@ const ArticlesPage = () => {
         />
         <Dropdown
           title="Filter by tags..."
-          items={items}
+          items={realTags}
           multiselect={true}
           onSelectionChanged={handleSelectedTagsChange}
         ></Dropdown>
