@@ -19,6 +19,10 @@ const ArticlesPage = () => {
   const [filterTags, setFilterTags] = useState([])
   const [displayedArticles, setDisplayedArticles] = useState(articles.edges)
 
+  function tagToString(tag) {
+    return `${tag.value} (${tag.count})`
+  }
+
   function handleSelectedTagsChange(items) {}
 
   useEffect(() => {
@@ -38,7 +42,7 @@ const ArticlesPage = () => {
         <input
           className="searchbox"
           type="text"
-          placeholder="Keyword Search"
+          placeholder="Search"
           value={filterTerm}
           onChange={e => setFilterTerm(e.target.value)}
         />
@@ -47,6 +51,7 @@ const ArticlesPage = () => {
           items={realTags}
           multiselect={true}
           onSelectionChanged={handleSelectedTagsChange}
+          displayFunction={tagToString}
         ></Dropdown>
       </section>
       <section className="card-container">

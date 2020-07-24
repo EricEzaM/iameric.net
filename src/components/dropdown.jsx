@@ -5,6 +5,9 @@ const Dropdown = ({
   items,
   multiselect = false,
   onSelectionChanged,
+  displayFunction = item => {
+    return item.value
+  },
 }) => {
   const [open, setOpen] = useState(false)
   const [selectedItems, setSelectedItems] = useState([])
@@ -29,22 +32,6 @@ const Dropdown = ({
     return selectedItems.includes(item)
   }
 
-  function getSelectedItemsDisplay() {
-    if (selectedItems.length > 2) {
-      var commaSeparatedItems = selectedItems
-        .slice(0, selectedItems.length - 1)
-        .map(item => item.value)
-        .join(", ")
-
-      commaSeparatedItems += ` and ${
-        selectedItems[selectedItems.length - 1].value
-      }`
-
-      return commaSeparatedItems
-    }
-    return selectedItems.map(item => item.value).join(" and ")
-  }
-
   return (
     <div className="dd-wrapper">
       <button
@@ -53,7 +40,7 @@ const Dropdown = ({
       >
         <div className="dd-header__title">
           <p className="dd-header__title--italic">
-            {selectedItems.length > 0 ? getSelectedItemsDisplay() : title}
+            {selectedItems.length > 0 ? `${selectedItems.length} items` : title}
           </p>
         </div>
         <div className="dd-header__action">
@@ -69,7 +56,7 @@ const Dropdown = ({
                 onClick={() => onClickItem(item)}
                 className={isItemSelected(item) ? "is-active" : ""}
               >
-                <span>{item.value}</span>
+                <span>{displayFunction(item)}</span>
               </button>
             </li>
           ))}
