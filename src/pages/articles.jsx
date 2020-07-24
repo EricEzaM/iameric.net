@@ -4,12 +4,74 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import { useEffect } from "react"
+import Dropdown from "../components/dropdown"
+
+const items = [
+  {
+    id: 1,
+    value: "Godot",
+  },
+  {
+    id: 2,
+    value: "GameDev",
+  },
+  {
+    id: 3,
+    value: "C#",
+  },
+  {
+    id: 4,
+    value: "UE4",
+  },
+  {
+    id: 5,
+    value: "Art",
+  },
+  {
+    id: 6,
+    value: "C#",
+  },
+  {
+    id: 7,
+    value: "C#",
+  },
+  {
+    id: 8,
+    value: "C#",
+  },
+  {
+    id: 9,
+    value: "C#",
+  },
+  {
+    id: 10,
+    value: "C#",
+  },
+  {
+    id: 11,
+    value: "C#",
+  },
+  {
+    id: 12,
+    value: "C#",
+  },
+  {
+    id: 13,
+    value: "C#",
+  },
+  {
+    id: 14,
+    value: "C#",
+  },
+]
 
 const ArticlesPage = () => {
   const { articles, tags } = useStaticQuery(query)
 
   const [filterTerm, setFilterTerm] = useState("")
   const [displayedArticles, setDisplayedArticles] = useState(articles.edges)
+
+  function handleSelectedTagsChange(items) {}
 
   useEffect(() => {
     let filteredArticles = articles.edges.filter(({ article }) => {
@@ -30,6 +92,12 @@ const ArticlesPage = () => {
         value={filterTerm}
         onChange={e => setFilterTerm(e.target.value)}
       />
+      <Dropdown
+        title="Filter by tags..."
+        items={items}
+        multiselect={true}
+        onSelectionChanged={handleSelectedTagsChange}
+      ></Dropdown>
       <section className="card-container">
         {displayedArticles.map(({ article: a }) => (
           <div key={a.id} className={"card"}>

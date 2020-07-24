@@ -1,6 +1,11 @@
 import React, { useState } from "react"
 
-const Dropdown = ({ title, items, multiselect = false }) => {
+const Dropdown = ({
+  title,
+  items,
+  multiselect = false,
+  onSelectionChanged,
+}) => {
   const [open, setOpen] = useState(false)
   const [selectedItems, setSelectedItems] = useState([])
   function toggle(open) {
@@ -8,12 +13,14 @@ const Dropdown = ({ title, items, multiselect = false }) => {
   }
 
   function onClickItem(item) {
+    let newSelectedItems = []
     if (selectedItems.includes(item)) {
-      let selectedItemAfterRemoval = selectedItems.filter(i => i.id != item.id)
-      setSelectedItems(selectedItemAfterRemoval)
+      newSelectedItems = selectedItems.filter(i => i.id != item.id)
     } else {
-      setSelectedItems([...selectedItems, item])
+      newSelectedItems = [...selectedItems, item]
     }
+    onSelectionChanged(newSelectedItems)
+    setSelectedItems(newSelectedItems)
   }
 
   function isItemSelected(item) {
@@ -23,17 +30,17 @@ const Dropdown = ({ title, items, multiselect = false }) => {
   function getSelectedItemsDisplay() {
     if (selectedItems.length > 2) {
       var commaSeparatedItems = selectedItems
-        .slice(0, 2)
+        .slice(0, selectedItems.length - 1)
         .map(item => item.value)
         .join(", ")
 
       commaSeparatedItems += ` and ${
         selectedItems[selectedItems.length - 1].value
-      }.`
+      }`
 
       return commaSeparatedItems
     }
-    return selectedItems.map(item => item.value).join(" and ") + "."
+    return selectedItems.map(item => item.value).join(" and ")
   }
 
   return (
@@ -45,9 +52,7 @@ const Dropdown = ({ title, items, multiselect = false }) => {
       >
         <div className="dd-header__title">
           <p className="dd-header__title--italic">
-            {selectedItems.length > 0
-              ? "Filtering by " + getSelectedItemsDisplay()
-              : "Filter by Tags..."}
+            {selectedItems.length > 0 ? getSelectedItemsDisplay() : title}
           </p>
         </div>
         <div className="dd-header__action">
@@ -58,9 +63,12 @@ const Dropdown = ({ title, items, multiselect = false }) => {
         <ul className="dd-list">
           {items.map((item, idx) => (
             <li key={idx}>
-              <button type="button" onClick={() => onClickItem(item)}>
+              <button
+                type="button"
+                onClick={() => onClickItem(item)}
+                className={isItemSelected(item) ? "is-active" : ""}
+              >
                 <span>{item.value}</span>
-                <span>{isItemSelected(item) ? "Yeppers" : "Nupp"}</span>
               </button>
             </li>
           ))}
