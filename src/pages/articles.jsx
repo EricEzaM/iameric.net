@@ -19,12 +19,17 @@ const ArticlesPage = () => {
   const [filterTags, setFilterTags] = useState([])
   const [displayedArticles, setDisplayedArticles] = useState(articles.edges)
 
+  // Used for custom display function of dropdown
   function tagToString(tag) {
     return `${tag.value} (${tag.count})`
   }
 
-  function handleSelectedTagsChange(items) {}
+  // Called when the dropdown selected values change
+  function onTagsChanged(tags) {
+    setFilterTags(tags)
+  }
 
+  // Updates filtered articles when filter term or tags change
   useEffect(() => {
     let filteredArticles = articles.edges.filter(({ article }) => {
       return article.frontmatter.title
@@ -32,8 +37,18 @@ const ArticlesPage = () => {
         .includes(filterTerm.toLowerCase())
     })
 
+    if (filterTags.length > 0) {
+      filteredArticles = filteredArticles.filter(({ article }) => {
+        // Returns true for articles which have tags that...
+        return article.frontmatter.tags.some(tag => {
+          // ... are in the filter tags list
+          return filterTags.some(filterTag => filterTag.value === tag)
+        })
+      })
+    }
+
     setDisplayedArticles(filteredArticles)
-  }, [filterTerm, articles])
+  }, [filterTerm, filterTags, articles])
 
   return (
     <Layout>
@@ -50,7 +65,7 @@ const ArticlesPage = () => {
           title="Filter by tags..."
           items={realTags}
           multiselect={true}
-          onSelectionChanged={handleSelectedTagsChange}
+          onSelectionChanged={onTagsChanged}
           displayFunction={tagToString}
         ></Dropdown>
       </section>
@@ -64,7 +79,7 @@ const ArticlesPage = () => {
                   width="500"
                   height="250"
                   src="https://source.unsplash.com/random/500x250"
-                  alt="image"
+                  alt="TODO something"
                 ></img>
                 <h3 className={"card__title"}>{a.frontmatter.title}</h3>
                 <div className={"card__body"}>{a.excerpt}</div>
