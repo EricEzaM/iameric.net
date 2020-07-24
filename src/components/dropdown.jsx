@@ -8,6 +8,7 @@ const Dropdown = ({
 }) => {
   const [open, setOpen] = useState(false)
   const [selectedItems, setSelectedItems] = useState([])
+
   function toggle(open) {
     setOpen(open)
   }
@@ -19,6 +20,7 @@ const Dropdown = ({
     } else {
       newSelectedItems = [...selectedItems, item]
     }
+    // Send event to parent before settings state and triggering refresh
     onSelectionChanged(newSelectedItems)
     setSelectedItems(newSelectedItems)
   }
@@ -47,7 +49,6 @@ const Dropdown = ({
     <div className="dd-wrapper">
       <button
         className={["dd-header", !open ? "dd-header--closed" : ""].join(" ")}
-        onKeyPress={() => toggle(!open)}
         onClick={() => toggle(!open)}
       >
         <div className="dd-header__title">
