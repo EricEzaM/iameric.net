@@ -109,6 +109,7 @@ $breakpoint: 768px;
 
   &__body {
     font-size: small;
+    color: $g-color-grey-500;
   }
 
   &__image {
@@ -128,6 +129,7 @@ $breakpoint: 768px;
   text-decoration: none;
   color: $g-color-secondary;
   font-weight: bold;
+  font-size: small;
 
   @include transition-fast();
 
