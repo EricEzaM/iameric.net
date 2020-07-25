@@ -23,7 +23,7 @@ const Dropdown = ({
   // setSelectedItems
   useEffect(() => {
     onSelectionChanged(selectedItems)
-  }, [selectedItems])
+  }, [selectedItems, onSelectionChanged])
 
   // Toggles the dropdown to be showing or not
   function toggle(open) {
@@ -35,7 +35,7 @@ const Dropdown = ({
   function onClickItem(item) {
     let newSelectedItems = []
     if (selectedItems.map(i => i.id).includes(item.id)) {
-      newSelectedItems = selectedItems.filter(i => i.id != item.id)
+      newSelectedItems = selectedItems.filter(i => i.id !== item.id)
     } else {
       newSelectedItems = [...selectedItems, item]
     }
