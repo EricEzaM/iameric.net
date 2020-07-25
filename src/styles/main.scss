@@ -189,6 +189,7 @@ $breakpoint: 768px;
   display: flex;
   flex-wrap: wrap;
   position: relative;
+  z-index: 1000;
 
   .dd-header {
     display: flex;
