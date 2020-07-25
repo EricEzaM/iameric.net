@@ -4,6 +4,7 @@ import { Link, graphql, useStaticQuery } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Dropdown from "../components/dropdown"
+import TagList from "../components/tag-list"
 
 const ArticlesPage = () => {
   const { articles, tags } = useStaticQuery(query)
@@ -96,14 +97,7 @@ const ArticlesPage = () => {
             </div>
             <div className="card__meta">
               <span>
-                {a.frontmatter.tags.map((e, i, arr) => (
-                  <React.Fragment key={i}>
-                    <Link className="tag" to={"/tags/" + e.toLowerCase()}>
-                      {e}
-                    </Link>
-                    {i !== arr.length - 1 && <span> / </span>}
-                  </React.Fragment>
-                ))}
+                <TagList tags={a.frontmatter.tags} />
               </span>
             </div>
           </div>

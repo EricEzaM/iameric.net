@@ -8,13 +8,15 @@
 
 $g-color-primary: #307ee4;
 $g-color-primary-light: #e7f1ff;
-$g-color-secondary: #6330e4;
+$g-color-secondary: #3ad3c5;
 
 $g-color-grey-900: #222222;
 $g-color-grey-700: #555555;
 $g-color-grey-500: #888888;
 $g-color-grey-300: #bbbbbb;
 $g-color-grey-100: hsl(0, 0%, 94%);
+
+$g-border-radius: 5px;
 
 * {
   padding: 0;
@@ -91,10 +93,10 @@ $breakpoint: 768px;
 .card {
   display: flex;
   flex-flow: column wrap;
-
+  color: white;
   padding: 1rem;
   border-radius: 10px;
-  background: $g-color-grey-100;
+  background: $g-color-grey-900;
 
   box-shadow: 0px 0px 5px $g-color-grey-300;
   @include transition();
@@ -105,6 +107,7 @@ $breakpoint: 768px;
 
   &:hover {
     box-shadow: 0px 0px 10px 2px $g-color-grey-300;
+    transform: translateY(-2px);
   }
 
   &__title {
@@ -115,7 +118,7 @@ $breakpoint: 768px;
   &__body {
     font-size: small;
     text-decoration: none;
-    color: $g-color-grey-500;
+    color: $g-color-grey-300;
   }
 
   &__image {
@@ -140,7 +143,7 @@ $breakpoint: 768px;
   @include transition-fast();
 
   &:hover {
-    color: darken($g-color-secondary, 30%);
+    color: lighten($g-color-secondary, 20%);
     transform: translateY(-1px);
     // box-shadow: -1px -1px 2px $g-color-grey-300;
   }
@@ -180,7 +183,6 @@ $breakpoint: 768px;
 // DROPDOWN
 
 .dd-wrapper {
-  $border-radius: 5px;
   $border-width: 1px;
   $border-color: $g-color-grey-300;
 
@@ -200,11 +202,11 @@ $breakpoint: 768px;
     border-color: $border-color;
     border-style: solid;
     border-width: $border-width;
-    border-radius: $border-radius $border-radius 0 0;
+    border-radius: $g-border-radius $g-border-radius 0 0;
 
     &--closed {
       border-width: $border-width;
-      border-radius: $border-radius;
+      border-radius: $g-border-radius;
     }
 
     &__action {
@@ -234,7 +236,7 @@ $breakpoint: 768px;
     width: 100%;
     overflow-y: auto;
 
-    border-radius: 0 0 $border-radius $border-radius;
+    border-radius: 0 0 $g-border-radius $g-border-radius;
     border-style: solid;
     border-color: $g-color-grey-300;
     border-width: 0 1px 1px 1px;
@@ -273,5 +275,34 @@ $breakpoint: 768px;
         }
       }
     }
+  }
+}
+
+.article {
+  &__header {
+    border-radius: $g-border-radius;
+    background: $g-color-grey-900;
+    color: white;
+    padding: 10px 20px;
+    margin-bottom: 1rem;
+    & h1 {
+      font-size: 2rem;
+      text-align: center;
+    }
+  }
+
+  &__meta {
+    font-size: small;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__tags {
+    position: relative;
+    margin: 5px 0;
+  }
+
+  &__body {
+    line-height: 2;
   }
 }
