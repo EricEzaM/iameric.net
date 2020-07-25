@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import onClickOutside from "react-onclickoutside"
 
 const Dropdown = ({
   title,
@@ -11,6 +12,15 @@ const Dropdown = ({
 }) => {
   const [open, setOpen] = useState(false)
   const [selectedItems, setSelectedItems] = useState([])
+
+  // Handles the state change in selectedItems
+  // and passes the new values to the parent. Done in
+  // useEffect to avoid issues with render order which would
+  // arise if onSelectionChanged was called immediately after
+  // setSelectedItems
+  useEffect(() => {
+    onSelectionChanged(selectedItems)
+  }, [selectedItems])
 
   // Toggles the dropdown to be showing or not
   function toggle(open) {
@@ -29,14 +39,7 @@ const Dropdown = ({
     setSelectedItems(newSelectedItems)
   }
 
-  // Handles the state change in selectedItems
-  // and passes the new values to the parent. Done in
-  // useEffect to avoid issues with render order which would
-  // arise if onSelectionChanged was called immediately after
-  // setSelectedItems
-  useEffect(() => {
-    onSelectionChanged(selectedItems)
-  }, [selectedItems])
+  Dropdown.handleClickOutside = () => toggle(false)
 
   // Checks whether an item is selected
   function isItemSelected(item) {
@@ -77,4 +80,8 @@ const Dropdown = ({
   )
 }
 
-export default Dropdown
+const clickOutsideConfig = {
+  handleClickOutside: () => Dropdown.handleClickOutside,
+}
+
+export default onClickOutside(Dropdown, clickOutsideConfig)
