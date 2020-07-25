@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react"
 import onClickOutside from "react-onclickoutside"
 
+import CaretDownIcon from "../images/caret-down.svg"
+import CaretUpIcon from "../images/caret-up.svg"
+
 const Dropdown = ({
   title,
   items,
@@ -58,7 +61,8 @@ const Dropdown = ({
           </p>
         </div>
         <div className="dd-header__action">
-          <p>{open ? "Close" : "Open"}</p>
+          {open && <CaretUpIcon />}
+          {!open && <CaretDownIcon />}
         </div>
       </button>
       {open && (
