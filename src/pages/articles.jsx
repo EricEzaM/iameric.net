@@ -15,6 +15,15 @@ const ArticlesPage = () => {
     count: tag.totalCount,
   }))
 
+  // Sort in-place by tag name alphabetically
+  realTags.sort(function (a, b) {
+    let atag = a.value.toLowerCase()
+    let btag = b.value.toLowerCase()
+    if (atag < btag) return -1
+    if (atag > btag) return 1
+    return 0
+  })
+
   const [filterTerm, setFilterTerm] = useState("")
   const [filterTags, setFilterTags] = useState([])
   const [displayedArticles, setDisplayedArticles] = useState(articles.edges)
