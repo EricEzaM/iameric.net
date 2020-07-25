@@ -1,8 +1,8 @@
 import React, { useState } from "react"
+import { Link, graphql, useStaticQuery } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { Link, graphql, useStaticQuery } from "gatsby"
 import { useEffect } from "react"
 import Dropdown from "../components/dropdown"
 
