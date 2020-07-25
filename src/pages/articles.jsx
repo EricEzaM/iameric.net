@@ -37,12 +37,13 @@ const ArticlesPage = () => {
         .includes(filterTerm.toLowerCase())
     })
 
+    let filterTagValues = filterTags.map(ft => ft.value)
     if (filterTags.length > 0) {
       filteredArticles = filteredArticles.filter(({ article }) => {
-        // Returns true for articles which have tags that...
-        return article.frontmatter.tags.some(tag => {
-          // ... are in the filter tags list
-          return filterTags.some(filterTag => filterTag.value === tag)
+        // Return true if every tag in 'filterTags' appears in the
+        // artciles list of tags.
+        return filterTagValues.every(filterTag => {
+          return article.frontmatter.tags.includes(filterTag)
         })
       })
     }
