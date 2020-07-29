@@ -16,7 +16,6 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    /*
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -24,7 +23,6 @@ module.exports = {
         path: `${__dirname}/content/assets`,
       },
     },
-    */
     {
       resolve: `gatsby-source-filesystem`,
       options: {
