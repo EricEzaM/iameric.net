@@ -50,7 +50,19 @@ module.exports = {
       options: {
         plugins: [
           {
+            resolve: "gatsby-remark-embed-video",
+            options: {
+              width: 800,
+              related: false, //Optional: Will remove related videos from the end of an embedded YouTube video.
+              noIframeBorder: true, //Optional: Disable insertion of <style> border: 0
+              containerClass: "embedVideo-container", //Optional: Custom CSS class for iframe container, for multiple classes separate them by space
+            },
+          },
+          {
             resolve: "gatsby-remark-images",
+            options: {
+              linkImagesToOriginal: false,
+            },
           },
           "gatsby-remark-prismjs",
         ],

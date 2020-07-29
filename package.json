@@ -13,6 +13,7 @@
     "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-sass": "^2.3.12",
     "gatsby-plugin-sharp": "^2.6.14",
+    "gatsby-remark-embed-video": "^3.0.10",
     "gatsby-remark-images": "^3.3.19",
     "gatsby-remark-prismjs": "^3.5.10",
     "gatsby-source-filesystem": "^2.3.14",
