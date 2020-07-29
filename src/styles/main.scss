@@ -8,8 +8,8 @@
 
 $g-color-primary: #307ee4;
 $g-color-primary-light: #e7f1ff;
-$g-color-secondary: #3ad3c5;
-$g-color-secondary-light: #e8fffd;
+$g-color-secondary: #2fd8e4;
+$g-color-secondary-light: #e5fdff;
 
 $g-color-grey-900: #222222;
 $g-color-grey-700: #555555;
@@ -116,6 +116,7 @@ $breakpoint: 768px;
 
   &__title {
     text-decoration: none;
+    color: white;
     padding: 5px 0;
   }
 
@@ -293,6 +294,7 @@ $breakpoint: 768px;
     & h1 {
       font-size: 2rem;
       text-align: center;
+      color: white;
     }
   }
 
@@ -319,7 +321,7 @@ $breakpoint: 768px;
       text-decoration: none;
       background: linear-gradient(
         transparent 85%,
-        mix($g-color-primary, transparent, 33%) 0
+        mix($g-color-secondary, transparent, 40%) 0
       );
 
       @include transition();
@@ -327,7 +329,7 @@ $breakpoint: 768px;
       &:hover {
         background: linear-gradient(
           transparent 85%,
-          mix($g-color-primary, transparent, 66%) 0
+          mix($g-color-secondary, transparent, 80%) 0
         );
       }
     }
@@ -342,7 +344,7 @@ $breakpoint: 768px;
 
 // Style horizontal rule
 hr {
-  border: 1px solid $g-color-grey-300;
+  border: 1px solid $g-color-primary;
 }
 
 blockquote {
@@ -352,4 +354,38 @@ blockquote {
   border: 1px solid $g-color-secondary;
   border-left: 10px solid $g-color-secondary;
   background-color: $g-color-secondary-light;
+}
+
+// Tables
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+
+  %table-common {
+    border: 1px solid $g-color-grey-300;
+    padding: 3px 10px;
+  }
+
+  th {
+    @extend %table-common;
+    background-color: $g-color-secondary-light;
+    border: 1px solid $g-color-secondary;
+  }
+
+  td {
+    @extend %table-common;
+  }
+
+  & tr:nth-child(even) {
+    background-color: $g-color-grey-100;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: $g-color-primary;
 }
