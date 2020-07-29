@@ -12,7 +12,7 @@ const Article = ({ data }) => {
         <div className="article__header">
           <h1>{post.frontmatter.title}</h1>
           <div className="article__meta">
-            <date>Published {post.frontmatter.date}</date>
+            <time>Published {post.frontmatter.date}</time>
             <p>{post.timeToRead} minute read</p>
           </div>
           <div className="article__tags">
