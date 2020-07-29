@@ -9,12 +9,13 @@
 $g-color-primary: #307ee4;
 $g-color-primary-light: #e7f1ff;
 $g-color-secondary: #3ad3c5;
+$g-color-secondary-light: #e8fffd;
 
 $g-color-grey-900: #222222;
 $g-color-grey-700: #555555;
 $g-color-grey-500: #888888;
 $g-color-grey-300: #bbbbbb;
-$g-color-grey-100: hsl(0, 0%, 94%);
+$g-color-grey-100: #f0f0f0;
 
 $g-border-radius: 5px;
 
@@ -106,7 +107,8 @@ $breakpoint: 768px;
   }
 
   &:hover {
-    box-shadow: 0px 0px 10px 2px $g-color-grey-300;
+    box-shadow: 0px 0px 8px 2px $g-color-grey-300;
+    box-shadow: 0px 2px 5px 1px $g-color-grey-500;
     transform: translateY(-2px);
   }
 
@@ -305,5 +307,30 @@ $breakpoint: 768px;
 
   &__body {
     line-height: 2;
+
+    & img {
+      display: block;
+      margin: 0 auto;
+    }
   }
+}
+
+// Center embedded video
+.embedVideo-iframe {
+  display: block;
+  margin: 0 auto;
+}
+
+// Style horizontal rule
+hr {
+  border: 1px solid $g-color-grey-300;
+}
+
+blockquote {
+  padding: 5px 10px;
+
+  border-radius: 0 5px 5px 0;
+  border: 1px solid $g-color-secondary;
+  border-left: 10px solid $g-color-secondary;
+  background-color: $g-color-secondary-light;
 }
