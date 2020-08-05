@@ -291,10 +291,18 @@ $breakpoint: 768px;
     color: white;
     padding: 10px 20px;
     margin-bottom: 1rem;
+
     & h1 {
       font-size: 2rem;
       text-align: center;
       color: white;
+    }
+
+    & .gatsby-image-wrapper {
+      margin: 10px 0;
+      height: 200px;
+      border: 2px solid $g-color-grey-100;
+      border-radius: $g-border-radius;
     }
   }
 

@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import Img from "gatsby-image"
 
 import Layout from "../components/layout"
 import TagList from "../components/tag-list"
@@ -18,6 +19,7 @@ const Article = ({ data }) => {
           <div className="article__tags">
             <TagList tags={post.frontmatter.tags} />
           </div>
+          <Img fluid={post.frontmatter.headerImage.childImageSharp.fluid} />
         </div>
         <div
           className="article__body"
@@ -38,6 +40,13 @@ export const query = graphql`
         title
         date(formatString: "dddd MMMM DD, YYYY")
         tags
+        headerImage {
+          childImageSharp {
+            fluid(quality: 100) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
       timeToRead
     }
