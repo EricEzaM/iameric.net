@@ -28,6 +28,7 @@ code[class*="language-"] {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
+  border-radius: 5px;
 }
 pre[class*="language-"]::selection,
 code[class*="language-"]::selection,
@@ -42,24 +43,25 @@ code[class*="language-"]::mozselection {
     text-shadow: none;
   }
 }
+$background: #e3ecf3;
 pre[class*="language-"] {
   padding: 1em;
   margin: 0.5em 0;
   overflow: auto;
-  background: #ecf3f9;
+  background: $background;
 }
 :not(pre) > code[class*="language-"] {
   padding: 0.1em 0.3em;
   border-radius: 0.3em;
   color: #2b2b2b;
-  background: #ecf3f9;
+  background: $background;
 }
 /*********************************************************
 * Tokens
 */
 .token.namespace,
 .token.class-name {
-  color: #3cb9a0;
+  color: #28b195;
 }
 
 .token.comment,
@@ -96,7 +98,7 @@ pre[class*="language-"] {
 .language-css .token.string,
 .style .token.string {
   color: #2b2b2b;
-  background: #ecf3f9;
+  background: $background;
 }
 .token.atrule,
 .token.attr-value,
