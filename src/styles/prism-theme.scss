@@ -11,17 +11,17 @@
 * General
 */
 
-$text-base: #2b2b2b;
-$background: #e3ecf3;
+$text-base: #e3ecf3;
+$background: #1a1a1a;
 $background-selection: #b3d4fc;
 $background-selection-accent: #abccf7;
 
-$class: #28b195;
-$function: #8826f0;
-$string: #bd8833;
-$keyword: #307ee4;
-$property: #439a86;
-$comment: #93a1a1;
+$class: #41cfb8;
+$function: #c891d8;
+$string: #ce9178;
+$keyword: #39b3fa;
+$property: #b5cea8;
+$comment: #93a19a;
 
 pre[class*="language-"],
 code[class*="language-"] {
@@ -63,7 +63,7 @@ pre[class*="language-"] {
   background: $background;
 }
 :not(pre) > code[class*="language-"] {
-  padding: 0.1em 0.3em;
+  padding: 0.1em 0.3em 0.3em 0.3em;
   border-radius: 0.3em;
   color: $text-base;
   background: $background;
