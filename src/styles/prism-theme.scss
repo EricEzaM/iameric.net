@@ -10,9 +10,22 @@
 /*********************************************************
 * General
 */
+
+$text-base: #2b2b2b;
+$background: #e3ecf3;
+$background-selection: #b3d4fc;
+$background-selection-accent: #abccf7;
+
+$class: #28b195;
+$function: #8826f0;
+$string: #bd8833;
+$keyword: #307ee4;
+$property: #439a86;
+$comment: #93a1a1;
+
 pre[class*="language-"],
 code[class*="language-"] {
-  color: #2b2b2b;
+  color: $text-base;
   text-shadow: none;
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   direction: ltr;
@@ -35,7 +48,7 @@ code[class*="language-"]::selection,
 pre[class*="language-"]::mozselection,
 code[class*="language-"]::mozselection {
   text-shadow: none;
-  background: #b3d4fc;
+  background: $background-selection;
 }
 @media print {
   pre[class*="language-"],
@@ -43,7 +56,6 @@ code[class*="language-"]::mozselection {
     text-shadow: none;
   }
 }
-$background: #e3ecf3;
 pre[class*="language-"] {
   padding: 1em;
   margin: 0.5em 0;
@@ -53,7 +65,7 @@ pre[class*="language-"] {
 :not(pre) > code[class*="language-"] {
   padding: 0.1em 0.3em;
   border-radius: 0.3em;
-  color: #2b2b2b;
+  color: $text-base;
   background: $background;
 }
 /*********************************************************
@@ -61,18 +73,20 @@ pre[class*="language-"] {
 */
 .token.namespace,
 .token.class-name {
-  color: #28b195;
+  color: $class;
 }
 
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #93a1a1;
+  color: $comment;
 }
+
 .token.punctuation {
-  color: #2b2b2b;
+  color: $text-base;
 }
+
 .token.property,
 .token.tag,
 .token.boolean,
@@ -80,38 +94,41 @@ pre[class*="language-"] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: #439a86;
+  color: $property;
 }
+
 .token.selector,
 .token.attr-name,
 .token.builtin,
 .token.inserted {
-  color: #307ee4;
+  color: $keyword;
 }
+
 .token.string,
 .token.char {
-  color: #bd8833;
+  color: $string;
 }
 .token.operator,
 .token.entity,
 .token.url,
 .language-css .token.string,
 .style .token.string {
-  color: #2b2b2b;
+  color: $text-base;
   background: $background;
 }
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: #307ee4;
+  color: $keyword;
 }
+
 .token.function {
-  color: #8826f0;
+  color: $function;
 }
 .token.regex,
 .token.important,
 .token.variable {
-  color: #439a86;
+  color: $property;
 }
 .token.important,
 .token.bold {
@@ -139,8 +156,8 @@ pre[class*="language-"] > code[class*="language-"] {
   right: 0;
   padding: inherit 0;
   margin-top: 1em;
-  background: #dbeeff;
-  box-shadow: inset 5px 0 0 #abccf7;
+  background: $background-selection;
+  box-shadow: inset 5px 0 0 $background-selection-accent;
   z-index: 0;
   pointer-events: none;
   line-height: inherit;
