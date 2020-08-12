@@ -5,7 +5,6 @@ import Card from "../components/card"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Dropdown from "../components/dropdown"
-import TagList from "../components/tag-list"
 
 const ArticlesPage = () => {
   const { articles, tags } = useStaticQuery(query)
@@ -83,11 +82,11 @@ const ArticlesPage = () => {
       <section className="card-container">
         {displayedArticles.map(({ article: a }) => (
           <Card
+            key={a.id}
             link={a.frontmatter.slug}
             title={a.frontmatter.title}
             body={a.excerpt}
             tags={a.frontmatter.tags}
-            key={a.id}
           />
         ))}
       </section>
