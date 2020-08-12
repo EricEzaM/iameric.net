@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 
+import Card from "../components/card"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Dropdown from "../components/dropdown"
@@ -81,26 +82,13 @@ const ArticlesPage = () => {
       </section>
       <section className="card-container">
         {displayedArticles.map(({ article: a }) => (
-          <div key={a.id} className={"card"}>
-            <div className={"card__content"}>
-              <Link to={"/" + a.frontmatter.slug}>
-                <img
-                  className={"card__image"}
-                  width="500"
-                  height="250"
-                  src="https://source.unsplash.com/random/500x250"
-                  alt="TODO something"
-                ></img>
-                <h3 className={"card__title"}>{a.frontmatter.title}</h3>
-                <div className={"card__body"}>{a.excerpt}</div>
-              </Link>
-            </div>
-            <div className="card__meta">
-              <span>
-                <TagList tags={a.frontmatter.tags} />
-              </span>
-            </div>
-          </div>
+          <Card
+            link={a.frontmatter.slug}
+            title={a.frontmatter.title}
+            body={a.excerpt}
+            tags={a.frontmatter.tags}
+            key={a.id}
+          />
         ))}
       </section>
     </Layout>
@@ -120,12 +108,10 @@ const query = graphql`
           id
           frontmatter {
             title
-            template
             tags
             slug
-            date
           }
-          excerpt(pruneLength: 200)
+          excerpt(pruneLength: 150)
         }
       }
     }
