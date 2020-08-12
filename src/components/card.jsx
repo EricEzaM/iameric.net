@@ -3,10 +3,9 @@ import { Link } from "gatsby"
 
 import TagList from "./tag-list"
 
-const Card = ({ link, title, body, tags, props }) => {
-  debugger
+const Card = ({ link, title, body, tags, ...props }) => {
   return (
-    <div className={"card"} {...props}>
+    <div {...props} className={"card"}>
       <div className={"card__content"}>
         <Link to={link}>
           <img
