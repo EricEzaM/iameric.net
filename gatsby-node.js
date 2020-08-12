@@ -37,7 +37,7 @@ exports.createPages = async ({ graphql, actions }) => {
     const slug = article.node.frontmatter.slug
 
     createPage({
-      path: slug,
+      path: `articles/${slug}`,
       component: articleTemplate,
       context: {
         slug: slug,
