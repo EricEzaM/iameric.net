@@ -142,7 +142,15 @@ $breakpoint: 768px;
   &__meta {
     margin-top: auto;
     padding-top: 1rem;
+
+    display: flex;
+    flex-direction: column;
   }
+}
+
+time {
+  font-size: small;
+  color: $g-color-light-grey;
 }
 
 .tag {
