@@ -87,6 +87,7 @@ const ArticlesPage = () => {
             title={a.frontmatter.title}
             body={a.excerpt}
             tags={a.frontmatter.tags}
+            imgSrc={"https://source.unsplash.com/random/500x250"}
           />
         ))}
       </section>
@@ -100,7 +101,7 @@ const query = graphql`
   query {
     articles: allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }
-      filter: { frontmatter: { template: { eq: "post" } } }
+      filter: { frontmatter: { template: { eq: "article" } } }
     ) {
       edges {
         article: node {

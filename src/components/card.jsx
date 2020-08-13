@@ -3,26 +3,26 @@ import { Link } from "gatsby"
 
 import TagList from "./tag-list"
 
-const Card = ({ link, title, body, tags, ...props }) => {
+const Card = ({ link, title, body, tags, imgSrc, ...props }) => {
   return (
     <div {...props} className={"card"}>
       <div className={"card__content"}>
         <Link to={link}>
-          <img
-            className={"card__image"}
-            width="500"
-            height="250"
-            src="https://source.unsplash.com/random/500x250"
-            alt="TODO something"
-          ></img>
-          <h3 className={"card__title"}>{title}</h3>
-          <div className={"card__body"}>{body}</div>
+          {imgSrc && (
+            <img
+              className={"card__image"}
+              width="500"
+              height="250"
+              src={imgSrc}
+              alt="TODO something"
+            />
+          )}
+          {title && <h3 className={"card__title"}>{title}</h3>}
+          {body && <div className={"card__body"}>{body}</div>}
         </Link>
       </div>
       <div className="card__meta">
-        <span>
-          <TagList tags={tags} />
-        </span>
+        <TagList tags={tags} />
       </div>
     </div>
   )
