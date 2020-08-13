@@ -6,18 +6,22 @@
 
 // You can delete this file if you're not using it
 const path = require(`path`)
+const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const articleTemplate = path.resolve(`./src/templates/article.jsx`)
+  const snippetTemplate = path.resolve(`./src/templates/snippet.jsx`)
 
   const result = await graphql(`
     query {
       allMarkdownRemark {
-        articles: edges {
+        edges {
           node {
             frontmatter {
+              template
               slug
+              category
             }
           }
         }
@@ -30,7 +34,13 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  const articles = result.data.allMarkdownRemark.articles
+  const allMarkdown = result.data.allMarkdownRemark.edges
+  const articles = allMarkdown.filter(
+    ({ node }) => node.frontmatter.template == "article"
+  )
+  const snippets = allMarkdown.filter(
+    ({ node }) => node.frontmatter.template == "snippet"
+  )
   const tags = result.data.allMarkdownRemark.tags
 
   articles.forEach(article => {
@@ -44,6 +54,18 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
-}
 
-const stringToSlug = string => {}
+  snippets.forEach(snippet => {
+    const slug = snippet.node.frontmatter.slug
+    const category = snippet.node.frontmatter.category
+
+    createPage({
+      path: `snippets/${category}/${slug}`,
+      component: snippetTemplate,
+      context: {
+        slug: slug,
+        category: category,
+      },
+    })
+  })
+}
