@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react"
-import onClickOutside from "react-onclickoutside"
+import React, { useState, useEffect, useRef } from "react"
 
 import CaretDownIcon from "../images/caret-down.svg"
 import CaretUpIcon from "../images/caret-up.svg"
+import useOnClickOutside from "../hooks/useOnClickOutside"
 
 const Dropdown = ({
   title,
@@ -13,6 +13,10 @@ const Dropdown = ({
     return item.value
   },
 }) => {
+  // Ref to the element for which we want to detect outside clicks
+  const ref = useRef()
+  useOnClickOutside(ref, () => toggle(false))
+  // State
   const [open, setOpen] = useState(false)
   const [selectedItems, setSelectedItems] = useState([])
 
@@ -42,8 +46,6 @@ const Dropdown = ({
     setSelectedItems(newSelectedItems)
   }
 
-  Dropdown.handleClickOutside = () => toggle(false)
-
   // Checks whether an item is selected
   function isItemSelected(item) {
     return selectedItems.map(i => i.id).includes(item.id)
@@ -66,7 +68,7 @@ const Dropdown = ({
         </div>
       </button>
       {open && (
-        <ul className="dd-list">
+        <ul className="dd-list" ref={ref}>
           {items.map((item, idx) => (
             <li key={idx}>
               <button
@@ -84,8 +86,4 @@ const Dropdown = ({
   )
 }
 
-const clickOutsideConfig = {
-  handleClickOutside: () => Dropdown.handleClickOutside,
-}
-
-export default onClickOutside(Dropdown, clickOutsideConfig)
+export default Dropdown

@@ -24,8 +24,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-helmet": "^6.1.0",
-    "react-onclickoutside": "^6.9.0"
+    "react-helmet": "^6.1.0"
   },
   "devDependencies": {
     "prettier": "2.0.5"
@@ -41,7 +40,8 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "develop_debug": "node --nolazy node_modules/gatsby/dist/bin/gatsby develop --inspect-brk"
   },
   "repository": {
     "type": "git",
