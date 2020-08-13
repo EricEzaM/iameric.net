@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Link, graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 
 import Card from "../components/card"
 import Layout from "../components/layout"
