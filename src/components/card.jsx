@@ -21,9 +21,11 @@ const Card = ({ link, title, body, tags, imgSrc, ...props }) => {
           {body && <div className={"card__body"}>{body}</div>}
         </Link>
       </div>
-      <div className="card__meta">
-        <TagList tags={tags} />
-      </div>
+      {tags && tags.length > 0 && (
+        <div className="card__meta">
+          <TagList tags={tags} />
+        </div>
+      )}
     </div>
   )
 }
