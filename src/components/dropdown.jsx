@@ -52,7 +52,7 @@ const Dropdown = ({
   }
 
   return (
-    <div className="dd-wrapper">
+    <div className="dd-wrapper" ref={ref}>
       <button
         className={["dd-header", !open ? "dd-header--closed" : ""].join(" ")}
         onClick={() => toggle(!open)}
@@ -68,7 +68,7 @@ const Dropdown = ({
         </div>
       </button>
       {open && (
-        <ul className="dd-list" ref={ref}>
+        <ul className="dd-list">
           {items.map((item, idx) => (
             <li key={idx}>
               <button
