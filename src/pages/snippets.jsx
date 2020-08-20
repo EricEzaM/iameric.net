@@ -10,24 +10,25 @@ const SnippetsPage = () => {
 
   let snips = snippets.edges
   let cats = categories.group
-  debugger
+
   return (
     <Layout>
       <SEO title="Snippets" />
       <section className="card-container--vertical">
-        {/* {snips.map(({ snippet: s }) => (
-          <Card
-            key={s.id}
-            link={s.frontmatter.slug}
-            title={s.frontmatter.title}
-          />
-        ))} */}
-        {cats.map(({ fieldValue, totalCount }) => (
-          <Card
-            link={"/"}
-            key={fieldValue}
-            title={`${fieldValue} (${totalCount})`}
-          />
+        {cats.map(({ fieldValue: cat, totalCount: catCount }) => (
+          <>
+            <Card link={"/"} key={cat} title={`${cat} (${catCount})`} />
+            {snips
+              .filter(({ snippet }) => snippet.frontmatter.category == cat)
+              .map(({ snippet }) => (
+                <Card
+                  link={"/"}
+                  key={snippet.id}
+                  title={snippet.frontmatter.title}
+                  className={"card--light"}
+                />
+              ))}
+          </>
         ))}
       </section>
     </Layout>
@@ -49,8 +50,8 @@ const query = graphql`
             title
             tags
             slug
+            category
           }
-          excerpt(pruneLength: 150)
         }
       }
     }

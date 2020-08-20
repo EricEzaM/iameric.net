@@ -146,6 +146,20 @@ $breakpoint: 768px;
     display: flex;
     flex-direction: column;
   }
+
+  &--light {
+    background: $g-color-off-white;
+
+    & * {
+      color: $g-color-darker;
+    }
+
+    &:hover {
+      box-shadow: 0px 0px 8px 2px $g-color-darker;
+      box-shadow: 0px 2px 5px 1px $g-color-darker;
+      transform: translateY(-5px);
+    }
+  }
 }
 
 time {
