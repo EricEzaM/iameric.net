@@ -184,6 +184,13 @@ time {
   row-gap: 1rem;
   column-gap: 1rem;
 
+  &--vertical {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 1rem;
+    column-gap: 0;
+  }
+
   @media (max-width: $breakpoint) {
     grid-template-columns: 1fr 1fr;
   }

@@ -9,17 +9,24 @@ const SnippetsPage = () => {
   const { snippets, categories } = useStaticQuery(query)
 
   let snips = snippets.edges
-
+  let cats = categories.group
+  debugger
   return (
     <Layout>
       <SEO title="Snippets" />
-      <div>Hello!</div>
-      <section className="card-container">
-        {snips.map(({ snippet: s }) => (
+      <section className="card-container--vertical">
+        {/* {snips.map(({ snippet: s }) => (
           <Card
             key={s.id}
             link={s.frontmatter.slug}
             title={s.frontmatter.title}
+          />
+        ))} */}
+        {cats.map(({ fieldValue, totalCount }) => (
+          <Card
+            link={"/"}
+            key={fieldValue}
+            title={`${fieldValue} (${totalCount})`}
           />
         ))}
       </section>
