@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery, Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -11,26 +11,31 @@ const SnippetsPage = () => {
   let snips = snippets.edges
   let cats = categories.group
 
+  function onCategoryClicked(category) {}
+
+  function toggleSnippet(id) {}
+
   return (
     <Layout>
       <SEO title="Snippets" />
-      <section className="card-container--vertical">
-        {cats.map(({ fieldValue: cat, totalCount: catCount }) => (
-          <>
-            <Card link={"/"} key={cat} title={`${cat} (${catCount})`} />
-            {snips
-              .filter(({ snippet }) => snippet.frontmatter.category == cat)
-              .map(({ snippet }) => (
-                <Card
-                  link={"/"}
-                  key={snippet.id}
-                  title={snippet.frontmatter.title}
-                  className={"card--light"}
-                />
-              ))}
-          </>
-        ))}
-      </section>
+      <div className="snippets-container">
+        <aside style={{ textAlign: "right" }}>
+          {cats.map(({ fieldValue, totalCount }) => (
+            <div key={fieldValue}>{fieldValue}</div>
+          ))}
+        </aside>
+        <section className="snippets-container__cards">
+          {snips.map(({ snippet: { id, frontmatter } }) => (
+            <div className="card card--narrow">
+              <Link to="/" key={id}>
+                <h3 className="card__title card__title--narrow">
+                  {frontmatter.title}
+                </h3>
+              </Link>
+            </div>
+          ))}
+        </section>
+      </div>
     </Layout>
   )
 }
