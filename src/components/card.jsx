@@ -4,7 +4,6 @@ import { Link } from "gatsby"
 import TagList from "./tag-list"
 
 const Card = ({ link, title, body, tags, imgSrc, className, ...props }) => {
-  debugger
   return (
     <div {...props} className={["card", className].join(" ")}>
       <div className={"card__content"}>
