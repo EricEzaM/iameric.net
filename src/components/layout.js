@@ -23,7 +23,8 @@ const Layout = ({ children }) => {
       >
         <Nav />
         <main>{children}</main>
-        <footer>
+        {/* TODO: Better solution than static 40px */}
+        <footer style={{ marginTop: "40px" }}>
           © {new Date().getFullYear()}, Built with
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
