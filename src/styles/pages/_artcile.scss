@@ -1,0 +1,63 @@
+.article {
+  &__header {
+    border-radius: $g-border-radius;
+    background: $g-color-darker;
+    color: $g-color-off-white;
+    padding: 10px 20px;
+    margin-bottom: 1rem;
+
+    & h1 {
+      font-size: 2rem;
+      text-align: center;
+      color: $g-color-off-white;
+    }
+
+    & .gatsby-image-wrapper {
+      margin: 10px 0;
+      height: 200px;
+      border: 2px solid $g-color-off-white;
+      border-radius: $g-border-radius;
+    }
+  }
+
+  &__meta {
+    font-size: small;
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__tags {
+    position: relative;
+    margin: 5px 0;
+  }
+
+  &__body {
+    line-height: 2;
+
+    & img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    & a {
+      text-decoration: none;
+      background: linear-gradient(
+        transparent 85%,
+        mix($g-color-main, transparent, 40%) 0
+      );
+
+      @include transition();
+
+      &:hover {
+        background: linear-gradient(
+          transparent 85%,
+          mix($g-color-main, transparent, 80%) 0
+        );
+      }
+    }
+  }
+}

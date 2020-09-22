@@ -1,0 +1,66 @@
+.card {
+  display: flex;
+  flex-flow: column wrap;
+  color: $g-color-off-white;
+  padding: 1rem;
+  border-radius: 10px;
+  background: $g-color-darker;
+
+  box-shadow: 0px 0px 5px $g-color-darker;
+  @include transition();
+
+  & a {
+    text-decoration: none;
+  }
+
+  &:hover {
+    box-shadow: 0px 0px 8px 2px $g-color-darker;
+    box-shadow: 0px 2px 5px 1px $g-color-darker;
+    transform: translateY(-5px);
+  }
+
+  &__title {
+    text-decoration: none;
+    color: $g-color-white;
+    padding: 5px 0;
+  }
+
+  &__body {
+    font-size: small;
+    text-decoration: none;
+    line-height: 1.6;
+    color: $g-color-light-grey;
+  }
+
+  &__image {
+    width: 100%;
+    border-radius: 5px;
+    height: auto;
+  }
+
+  &__meta {
+    margin-top: auto;
+    padding-top: 1rem;
+
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 1rem;
+  column-gap: 1rem;
+
+  &--vertical {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 1rem;
+    column-gap: 0;
+  }
+
+  @media (max-width: $breakpoint) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
