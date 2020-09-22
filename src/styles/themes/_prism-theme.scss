@@ -11,21 +11,21 @@
 * General
 */
 
-$text-base: #e3ecf3;
-$background: #1a1a1a;
-$background-selection: #b3d4fc;
-$background-selection-accent: #abccf7;
+$prism-text-base: #e3ecf3;
+$prism-background: #1a1a1a;
+$prism-background-selection: #b3d4fc;
+$prism-background-selection-accent: #abccf7;
 
-$class: #00dfb7;
-$function: #c891d8;
-$string: #ce9178;
-$keyword: #39b3fa;
-$property: #b5cea8;
-$comment: #93a19a;
+$prism-class: #00dfb7;
+$prism-function: #c891d8;
+$prism-string: #ce9178;
+$prism-keyword: #39b3fa;
+$prism-property: #b5cea8;
+$prism-comment: #93a19a;
 
 pre[class*="language-"],
 code[class*="language-"] {
-  color: $text-base;
+  color: $prism-text-base;
   text-shadow: none;
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   direction: ltr;
@@ -48,7 +48,7 @@ code[class*="language-"]::selection,
 pre[class*="language-"]::mozselection,
 code[class*="language-"]::mozselection {
   text-shadow: none;
-  background: $background-selection;
+  background: $prism-background-selection;
 }
 @media print {
   pre[class*="language-"],
@@ -60,31 +60,31 @@ pre[class*="language-"] {
   padding: 1em;
   margin: 0.5em 0;
   overflow: auto;
-  background: $background;
+  background: $prism-background;
 }
 :not(pre) > code[class*="language-"] {
   padding: 0.1em 0.3em 0.3em 0.3em;
   border-radius: 0.3em;
-  color: $text-base;
-  background: $background;
+  color: $prism-text-base;
+  background: $prism-background;
 }
 /*********************************************************
 * Tokens
 */
 .token.namespace,
 .token.class-name {
-  color: $class;
+  color: $prism-class;
 }
 
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: $comment;
+  color: $prism-comment;
 }
 
 .token.punctuation {
-  color: $text-base;
+  color: $prism-text-base;
 }
 
 .token.property,
@@ -94,41 +94,41 @@ pre[class*="language-"] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: $property;
+  color: $prism-property;
 }
 
 .token.selector,
 .token.attr-name,
 .token.builtin,
 .token.inserted {
-  color: $keyword;
+  color: $prism-keyword;
 }
 
 .token.string,
 .token.char {
-  color: $string;
+  color: $prism-string;
 }
 .token.operator,
 .token.entity,
 .token.url,
 .language-css .token.string,
 .style .token.string {
-  color: $text-base;
-  background: $background;
+  color: $prism-text-base;
+  background: $prism-background;
 }
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: $keyword;
+  color: $prism-keyword;
 }
 
 .token.function {
-  color: $function;
+  color: $prism-function;
 }
 .token.regex,
 .token.important,
 .token.variable {
-  color: $property;
+  color: $prism-property;
 }
 .token.important,
 .token.bold {
@@ -156,8 +156,8 @@ pre[class*="language-"] > code[class*="language-"] {
   right: 0;
   padding: inherit 0;
   margin-top: 1em;
-  background: $background-selection;
-  box-shadow: inset 5px 0 0 $background-selection-accent;
+  background: $prism-background-selection;
+  box-shadow: inset 5px 0 0 $prism-background-selection-accent;
   z-index: 0;
   pointer-events: none;
   line-height: inherit;
