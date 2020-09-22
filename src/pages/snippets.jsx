@@ -3,7 +3,6 @@ import { graphql, useStaticQuery, Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Card from "../components/card"
 
 const SnippetsPage = () => {
   const { snippets, categories } = useStaticQuery(query)
@@ -18,19 +17,17 @@ const SnippetsPage = () => {
   return (
     <Layout>
       <SEO title="Snippets" />
-      <div className="snippets-container">
+      <div className="">
         <aside style={{ textAlign: "right" }}>
           {cats.map(({ fieldValue, totalCount }) => (
             <div key={fieldValue}>{fieldValue}</div>
           ))}
         </aside>
-        <section className="snippets-container__cards">
+        <section className="">
           {snips.map(({ snippet: { id, frontmatter } }) => (
-            <div className="card card--narrow">
+            <div className="">
               <Link to="/" key={id}>
-                <h3 className="card__title card__title--narrow">
-                  {frontmatter.title}
-                </h3>
+                <h3 className="">{frontmatter.title}</h3>
               </Link>
             </div>
           ))}
