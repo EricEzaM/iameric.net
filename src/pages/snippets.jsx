@@ -17,12 +17,21 @@ const SnippetsPage = () => {
   return (
     <Layout>
       <SEO title="Snippets" />
-      <div className="">
-        <aside style={{ textAlign: "right" }}>
-          {cats.map(({ fieldValue, totalCount }) => (
-            <div key={fieldValue}>{fieldValue}</div>
-          ))}
-        </aside>
+      <div className="snippets-page-container">
+        {/* Aside is inside div so that it's height is independand of section height */}
+        <div>
+          <aside
+            className="snippets-category-list"
+            style={{ textAlign: "right" }}
+          >
+            {cats.map(({ fieldValue, totalCount }) => (
+              <div className="snippets-category-list__item" key={fieldValue}>
+                {fieldValue}
+              </div>
+            ))}
+          </aside>
+        </div>
+        <vl />
         <section className="">
           {snips.map(({ snippet: { id, frontmatter } }) => (
             <div className="">
