@@ -3,11 +3,11 @@
   flex-flow: column wrap;
   color: $g-color-off-white;
   padding: 1rem;
-  border-radius: 10px;
+  border-radius: $g-border-radius-lg;
   background: $g-color-darker;
 
   box-shadow: 0px 0px 5px $g-color-darker;
-  @include transition();
+  transition: all $trans-spd-med;
 
   & a {
     text-decoration: none;

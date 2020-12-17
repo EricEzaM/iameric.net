@@ -50,7 +50,7 @@
         mix($g-color-main, transparent, 40%) 0
       );
 
-      @include transition();
+      transition: all $trans-spd-med;
 
       &:hover {
         background: linear-gradient(

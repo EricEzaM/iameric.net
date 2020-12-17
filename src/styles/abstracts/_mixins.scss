@@ -1,7 +1,15 @@
-@mixin transition {
-  transition: all 250ms ease-in-out;
-}
+@mixin underline-grow-on-hover($color) {
+  &::after {
+    display: block;
+    content: "";
+    border-bottom: solid 2px $color;
+    transform: scaleX(0);
+    transition: transform $trans-spd-med ease-in-out;
+  }
 
-@mixin transition-fast {
-  transition: all 100ms ease-out;
+  &:hover {
+    &::after {
+      transform: scaleX(1);
+    }
+  }
 }

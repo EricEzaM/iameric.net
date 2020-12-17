@@ -25,21 +25,6 @@
     }
 
     // Underline animation on hover
-    &::after {
-      display: block;
-      content: "";
-      border-bottom: solid 2px $g-color-main;
-      transform: scaleX(0);
-      @include transition();
-    }
-
-    &:hover {
-      a {
-        color: $g-color-dark;
-      }
-      &::after {
-        transform: scaleX(1);
-      }
-    }
+    @include underline-grow-on-hover($g-color-main);
   }
 }

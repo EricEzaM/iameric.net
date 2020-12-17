@@ -5,7 +5,7 @@
   font-weight: bold;
   font-size: small;
 
-  @include transition-fast();
+  transition: all $trans-spd-fast;
 
   // Underline animation on hover
   &::after {
@@ -13,7 +13,7 @@
     content: "";
     border-bottom: solid 2px $g-color-tag;
     transform: scaleX(0);
-    @include transition();
+    transition: all $trans-spd-med;
   }
 
   &:hover {
