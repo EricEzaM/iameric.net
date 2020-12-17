@@ -22,6 +22,7 @@ const Nav = () => {
           style={{ width: "40%", margin: "auto" }}
           fluid={headerImage.image.childImageSharp.fluid}
           alt="header"
+          loading="eager"
         />
       </Link>
 
