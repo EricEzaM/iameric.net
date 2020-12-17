@@ -59,7 +59,13 @@ const Dropdown = ({
       >
         <div className="dd-header__title">
           <p className="dd-header__title--italic">
-            {selectedItems.length > 0 ? `${selectedItems.length} items` : title}
+            {/* Determine how items should be displayed based on the number selected */}
+            {/* TODO: Parameterise the limits? (> 0, < 3, etc) */}
+            {selectedItems.length > 0
+              ? selectedItems.length < 3
+                ? selectedItems.map(item => displayFunction(item)).join(", ")
+                : `${selectedItems.length} items`
+              : title}
           </p>
         </div>
         <div className="dd-header__action">
