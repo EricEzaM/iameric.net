@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 
 import TagList from "./tag-list"
 
-const Card = ({ link, title, body, tags, imgSrc, className, ...props }) => {
+const Card = ({ link, title, metaText, body, tags, imgSrc, className, ...props }) => {
   return (
     <div {...props} className={["card", className].join(" ")}>
       <div className={"card__content"}>
@@ -21,11 +21,14 @@ const Card = ({ link, title, body, tags, imgSrc, className, ...props }) => {
           {body && <div className={"card__body"}>{body}</div>}
         </Link>
       </div>
-      {tags && tags.length > 0 && (
-        <div className="card__meta">
-          <TagList tags={tags} />
-        </div>
-      )}
+      <div className="card__meta">
+        {metaText && <div className={"card__meta-text"}>{metaText}</div>}
+        {tags && tags.length > 0 && (
+          <div>
+            <TagList tags={tags} />
+          </div>
+        )}
+      </div>
     </div>
   )
 }

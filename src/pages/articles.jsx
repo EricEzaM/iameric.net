@@ -87,6 +87,7 @@ const ArticlesPage = () => {
             title={a.frontmatter.title}
             body={a.excerpt}
             tags={a.frontmatter.tags}
+            metaText={a.frontmatter.date}
             imgSrc={"https://source.unsplash.com/random/500x250"}
           />
         ))}
@@ -110,6 +111,7 @@ const query = graphql`
             title
             tags
             slug
+            date(formatString: "MMMM Do, YYYY")
           }
           excerpt(pruneLength: 150)
         }
