@@ -3,6 +3,7 @@ import { graphql, useStaticQuery, Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Card from "../components/card"
 
 const SnippetsPage = () => {
   const { snippets, categories } = useStaticQuery(query)
@@ -18,29 +19,31 @@ const SnippetsPage = () => {
     <Layout>
       <SEO title="Snippets" />
       <div className="snippets-page-container">
-        {/* Aside is inside div so that it's height is independand of section height */}
+        {/* Aside is inside div so that it's height is independent of section height */}
         <div>
           <aside
             className="snippets-category-list"
             style={{ textAlign: "right" }}
           >
             {cats.map(({ fieldValue, totalCount }) => (
-              <div className="snippets-category-list__item" key={fieldValue}>
+              <button className="snippets-category-list__item" key={fieldValue}>
                 {fieldValue}
-              </div>
+              </button>
             ))}
           </aside>
         </div>
-        <vl />
-        <section className="">
-          {snips.map(({ snippet: { id, frontmatter } }) => (
-            <div className="">
-              <Link to="/" key={id}>
-                <h3 className="">{frontmatter.title}</h3>
-              </Link>
-            </div>
-          ))}
-        </section>
+          <section className="card-container">
+            {snips.map(({ snippet: { id, frontmatter } }) => (
+              <Card
+                key={id}
+                link={frontmatter.title}
+                title={frontmatter.title}
+                body={frontmatter.title}
+                imgSrc={""}
+                tags={[]}
+              />
+            ))}
+          </section>
       </div>
     </Layout>
   )
