@@ -32,18 +32,20 @@ const SnippetsPage = () => {
             ))}
           </aside>
         </div>
-          <section className="card-container">
-            {snips.map(({ snippet: { id, frontmatter } }) => (
-              <Card
-                key={id}
-                link={frontmatter.title}
-                title={frontmatter.title}
-                body={frontmatter.title}
-                imgSrc={""}
-                tags={[]}
-              />
-            ))}
-          </section>
+        <section className="card-container--vertical">
+          {snips.map(({ snippet: { id, frontmatter } }) => (
+            <Card
+              key={id}
+              vertical={true}
+              link={frontmatter.title}
+              title={frontmatter.title}
+              body={frontmatter.title}
+              imgSrc={"https://source.unsplash.com/random/250x250"}
+              metaText={frontmatter.date}
+              tags={[]}
+            />
+          ))}
+        </section>
       </div>
     </Layout>
   )
@@ -62,9 +64,9 @@ const query = graphql`
           id
           frontmatter {
             title
-            tags
             slug
             category
+            date(formatString: "MMMM Do, YYYY")
           }
         }
       }
