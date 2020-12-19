@@ -1,6 +1,6 @@
 .dd-wrapper {
   $border-width: 1px;
-  $border-color: $g-color-dark;
+  $border-color: $g-color-grey-dark;
 
   display: flex;
   flex-wrap: wrap;
@@ -42,7 +42,7 @@
 
       &--italic {
         margin: 0;
-        color: $g-color-dark;
+        color: $g-color-grey-dark;
         font-style: italic;
       }
     }
@@ -58,7 +58,7 @@
 
     border-radius: 0 0 $g-border-radius $g-border-radius;
     border-style: solid;
-    border-color: $g-color-dark;
+    border-color: $g-color-grey-dark;
     border-width: 0 1px 1px 1px;
 
     li {
