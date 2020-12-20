@@ -12,6 +12,7 @@ const Card = ({
   imgSrc,
   vertical = false,
 }) => {
+  // Wide list / multiple columns
   if (!vertical) {
     return (
       <Link to={link} className={"card"}>
@@ -39,6 +40,7 @@ const Card = ({
       </Link>
     )
   }
+  // Vertical list / one column
   return (
     <Link to={link} className={"card--vertical"}>
       {imgSrc && (
