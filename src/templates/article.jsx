@@ -38,7 +38,7 @@ export const query = graphql`
       html
       frontmatter {
         title
-        date(formatString: "dddd MMMM DD, YYYY")
+        date(formatString: "dddd MMMM Do, YYYY")
         tags
         headerImage {
           childImageSharp {
