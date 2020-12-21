@@ -1,5 +1,6 @@
 .article {
   &__header {
+    border-top: solid 10px $g-color-main;
     border-radius: $g-border-radius;
     background: $g-color-grey-darker;
     color: $g-color-off-white;
@@ -21,6 +22,7 @@
   }
 
   &__meta {
+    color: $g-color-main-light;
     font-size: small;
     display: flex;
     justify-content: space-between;
