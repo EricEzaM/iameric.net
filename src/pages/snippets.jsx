@@ -1,5 +1,5 @@
-import React from "react"
-import { graphql, useStaticQuery, Link } from "gatsby"
+import React, { useState, useEffect } from "react"
+import { graphql, useStaticQuery } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -8,12 +8,26 @@ import Card from "../components/card"
 const SnippetsPage = () => {
   const { snippets, categories } = useStaticQuery(query)
 
-  let snips = snippets.edges
   let cats = categories.group
 
-  function onCategoryClicked(category) {}
+  const [category, setCategory] = useState("")
+  const [displayedSnippets, setDisplayedSnippets] = useState(snippets.edges)
 
-  function toggleSnippet(id) {}
+  function onCategoryClicked(clickedCategory) {
+    if (clickedCategory === category) {
+      setCategory("")
+    } else {
+      setCategory(clickedCategory)
+    }
+  }
+
+  useEffect(() => {
+    let filteredSnippets = snippets.edges.filter(({ snippet }) => {
+      return snippet.frontmatter.category === category || category === ""
+    })
+
+    setDisplayedSnippets(filteredSnippets)
+  }, [category, snippets])
 
   return (
     <Layout>
@@ -26,25 +40,35 @@ const SnippetsPage = () => {
             style={{ textAlign: "right" }}
           >
             {cats.map(({ fieldValue, totalCount }) => (
-              <button className="snippets-category-list__item" key={fieldValue}>
+              <button
+                className={[
+                  "snippets-category-list__item",
+                  fieldValue === category ? "active" : "",
+                ].join(" ")}
+                key={fieldValue}
+                onClick={e => onCategoryClicked(fieldValue, e)}
+              >
                 {fieldValue}
               </button>
             ))}
+            {<div className="snippets-category-list__spacer"></div>}
           </aside>
         </div>
         <section className="card-container--vertical">
-          {snips.map(({ snippet: { id, frontmatter } }) => (
-            <Card
-              key={id}
-              vertical={true}
-              link={frontmatter.title}
-              title={frontmatter.title}
-              body={frontmatter.title}
-              imgSrc={"https://source.unsplash.com/random/250x250"}
-              metaText={frontmatter.date}
-              tags={[]}
-            />
-          ))}
+          {displayedSnippets.map(
+            ({ snippet: { id, frontmatter, excerpt } }) => (
+              <Card
+                key={id}
+                vertical={true}
+                link={frontmatter.title}
+                title={frontmatter.title}
+                body={excerpt}
+                imgSrc={"https://source.unsplash.com/random/250x250"}
+                metaText={frontmatter.date}
+                tags={[]}
+              />
+            )
+          )}
         </section>
       </div>
     </Layout>
@@ -68,6 +92,7 @@ const query = graphql`
             category
             date(formatString: "MMMM Do, YYYY")
           }
+          excerpt(pruneLength: 200)
         }
       }
     }
