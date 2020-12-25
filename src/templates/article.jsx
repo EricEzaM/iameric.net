@@ -13,11 +13,8 @@ const Article = ({ data }) => {
         <div className="article__header">
           <h1>{post.frontmatter.title}</h1>
           <div className="article__meta">
-            <time>Published {post.frontmatter.date}</time>
-            <p>{post.timeToRead} minute read</p>
-          </div>
-          <div className="article__tags">
             <TagList tags={post.frontmatter.tags} />
+            <time>Published {post.frontmatter.date}</time>
           </div>
           <Img fluid={post.frontmatter.headerImage.childImageSharp.fluid} />
         </div>
