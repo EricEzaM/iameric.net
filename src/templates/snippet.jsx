@@ -4,7 +4,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 
 const Snippet = ({ data }) => {
-  const post = data.markdownRemark
+  const post = data.snippet
   return (
     <Layout>
       <div className="article">
@@ -26,14 +26,13 @@ const Snippet = ({ data }) => {
 export default Snippet
 
 export const query = graphql`
-  query($slug: String!, $category: String!) {
-    snippets: markdownRemark(
-      frontmatter: { slug: { eq: $slug }, category: { eq: $category } }
-    ) {
+  query($slug: String!) {
+    snippet: markdownRemark(frontmatter: { slug: { eq: $slug } }) {
       html
       frontmatter {
         title
-        date(formatString: "dddd MMMM DD, YYYY")
+        category
+        date(formatString: "dddd MMMM Do, YYYY")
       }
     }
   }

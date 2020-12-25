@@ -4,6 +4,7 @@ import { graphql, useStaticQuery } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Card from "../components/card"
+import { getCategoryUrl } from "../utils/category-url-conversion"
 
 const SnippetsPage = () => {
   const { snippets, categories } = useStaticQuery(query)
@@ -60,7 +61,11 @@ const SnippetsPage = () => {
               <Card
                 key={id}
                 vertical={true}
-                link={frontmatter.title}
+                link={
+                  getCategoryUrl(frontmatter.category) +
+                  "/" +
+                  encodeURIComponent(frontmatter.slug)
+                }
                 title={frontmatter.title}
                 body={excerpt}
                 imgSrc={"https://source.unsplash.com/random/250x250"}
