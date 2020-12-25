@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import TagList from "./tag-list"
+import LinkList from "./link-list"
 
 const Card = ({
   link,
@@ -33,7 +33,7 @@ const Card = ({
           {metaText && <div className={"card__meta-text"}>{metaText}</div>}
           {tags && tags.length > 0 && (
             <div>
-              <TagList tags={tags} />
+              <LinkList tags={tags} urlPartName="tag" />
             </div>
           )}
         </div>
@@ -59,7 +59,7 @@ const Card = ({
             {metaText && <div className={"card__meta-text"}>{metaText}</div>}
             {tags && tags.length > 0 && (
               <div>
-                <TagList tags={tags} />
+                <LinkList tags={tags} urlPartName="tag" />
               </div>
             )}
           </div>

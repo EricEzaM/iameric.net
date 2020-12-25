@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import Img from "gatsby-image"
 
 import Layout from "../components/layout"
-import TagList from "../components/tag-list"
+import LinkList from "../components/link-list"
 
 const Article = ({ data }) => {
   const post = data.post
@@ -13,7 +13,7 @@ const Article = ({ data }) => {
         <div className="article__header">
           <h1>{post.frontmatter.title}</h1>
           <div className="article__meta">
-            <TagList tags={post.frontmatter.tags} />
+            <LinkList tags={post.frontmatter.tags} urlPartName="tag" />
             <time>Published {post.frontmatter.date}</time>
           </div>
           <Img fluid={post.frontmatter.headerImage.childImageSharp.fluid} />

@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 
-const TagList = ({ tags }) => {
+const LinkList = ({ tags, urlPartName }) => {
   return (
     <>
       {tags && (
@@ -9,7 +9,10 @@ const TagList = ({ tags }) => {
           {tags.map((e, i, arr) => (
             // React fragment = <>, </>
             <React.Fragment key={i}>
-              <Link className="tag" to={"/tags/" + e.toLowerCase()}>
+              <Link
+                className="tag"
+                to={"/" + urlPartName + "/" + e.toLowerCase()}
+              >
                 {e}
               </Link>
               {i !== arr.length - 1 && <span> / </span>}
@@ -21,4 +24,4 @@ const TagList = ({ tags }) => {
   )
 }
 
-export default TagList
+export default LinkList
