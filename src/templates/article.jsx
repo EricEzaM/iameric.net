@@ -6,7 +6,7 @@ import Layout from "../components/layout"
 import TagList from "../components/tag-list"
 
 const Article = ({ data }) => {
-  const post = data.markdownRemark
+  const post = data.post
   return (
     <Layout>
       <div className="article">
@@ -34,7 +34,7 @@ export default Article
 
 export const query = graphql`
   query($slug: String!) {
-    markdownRemark(frontmatter: { slug: { eq: $slug } }) {
+    post: markdownRemark(frontmatter: { slug: { eq: $slug } }) {
       html
       frontmatter {
         title
