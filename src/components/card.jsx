@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 
 import LinkList from "./link-list"
+import { getCategoryUrl } from "../utils/category-url-conversion"
 
 const Card = ({
   link,
@@ -33,7 +34,10 @@ const Card = ({
           {metaText && <div className={"card__meta-text"}>{metaText}</div>}
           {tags && tags.length > 0 && (
             <div>
-              <LinkList tags={tags} urlPartName="tag" />
+              <LinkList
+                titles={tags}
+                links={tags.map(e => "tag/" + getCategoryUrl(e))}
+              />
             </div>
           )}
         </div>
@@ -59,7 +63,10 @@ const Card = ({
             {metaText && <div className={"card__meta-text"}>{metaText}</div>}
             {tags && tags.length > 0 && (
               <div>
-                <LinkList tags={tags} urlPartName="tag" />
+                <LinkList
+                  titles={tags}
+                  links={tags.map(e => "tag/" + getCategoryUrl(e))}
+                />
               </div>
             )}
           </div>

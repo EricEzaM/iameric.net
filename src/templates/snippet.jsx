@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import LinkList from "../components/link-list"
+import { getCategoryUrl } from "../utils/category-url-conversion"
 
 const Snippet = ({ data }) => {
   const post = data.snippet
@@ -13,8 +14,8 @@ const Snippet = ({ data }) => {
           <h1>{post.frontmatter.title}</h1>
           <div className="article__meta">
             <LinkList
-              tags={[post.frontmatter.category]}
-              urlPartName="snippet-category"
+              titles={[post.frontmatter.category]}
+              links={[getCategoryUrl(post.frontmatter.category)]}
             />
             <time>Published {post.frontmatter.date}</time>
           </div>

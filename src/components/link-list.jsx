@@ -1,18 +1,15 @@
 import React from "react"
 import { Link } from "gatsby"
 
-const LinkList = ({ tags, urlPartName }) => {
+const LinkList = ({ titles, links }) => {
   return (
     <>
-      {tags && (
+      {titles && titles.length === links.length && (
         <span>
-          {tags.map((e, i, arr) => (
+          {titles.map((e, i, arr) => (
             // React fragment = <>, </>
             <React.Fragment key={i}>
-              <Link
-                className="tag"
-                to={"/" + urlPartName + "/" + e.toLowerCase()}
-              >
+              <Link className="link-list-link" to={"/" + links[i]}>
                 {e}
               </Link>
               {i !== arr.length - 1 && <span> / </span>}

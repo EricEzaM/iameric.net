@@ -4,6 +4,7 @@ import Img from "gatsby-image"
 
 import Layout from "../components/layout"
 import LinkList from "../components/link-list"
+import { getCategoryUrl } from "../utils/category-url-conversion"
 
 const Article = ({ data }) => {
   const post = data.post
@@ -13,7 +14,10 @@ const Article = ({ data }) => {
         <div className="article__header">
           <h1>{post.frontmatter.title}</h1>
           <div className="article__meta">
-            <LinkList tags={post.frontmatter.tags} urlPartName="tag" />
+            <LinkList
+              titles={post.frontmatter.tags}
+              links={post.frontmatter.tags.map(e => "tag/" + getCategoryUrl(e))}
+            />
             <time>Published {post.frontmatter.date}</time>
           </div>
           <Img fluid={post.frontmatter.headerImage.childImageSharp.fluid} />
