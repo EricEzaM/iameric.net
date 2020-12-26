@@ -1,5 +1,11 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import { graphql, useStaticQuery } from "gatsby"
+import {
+  useQueryParam,
+  ArrayParam,
+  StringParam,
+  withDefault,
+} from "use-query-params"
 
 import Card from "../components/card"
 import Layout from "../components/layout"
@@ -24,19 +30,28 @@ const ArticlesPage = () => {
     return 0
   })
 
-  const [filterTerm, setFilterTerm] = useState("")
-  const [filterTags, setFilterTags] = useState([])
   const [displayedArticles, setDisplayedArticles] = useState(articles.edges)
+  // Use URL query string to store state of filter term and tags
+  const [filterTerm, setFilterTerm] = useQueryParam(
+    "term",
+    withDefault(StringParam, "")
+  )
+  const [filterTags, setFilterTags] = useQueryParam(
+    "tags",
+    withDefault(ArrayParam, [])
+  )
 
-  // Used for custom display function of dropdown
-  function tagToString(tag) {
-    return `${tag.value} (${tag.count})`
-  }
-
-  // Called when the dropdown selected values change
-  function onTagsChanged(tags) {
-    setFilterTags(tags)
-  }
+  // Called when the dropdown selected values change. Use a useCallback since passing
+  // this to the dropdown without it spammed the history and made page hang
+  const tagsChangedCallback = useCallback(
+    items => {
+      setFilterTags(
+        items.map(tag => tag.value),
+        "replaceIn"
+      )
+    },
+    [setFilterTags]
+  )
 
   // Updates filtered articles when filter term or tags change
   useEffect(() => {
@@ -46,12 +61,11 @@ const ArticlesPage = () => {
         .includes(filterTerm.toLowerCase())
     })
 
-    let filterTagValues = filterTags.map(ft => ft.value)
     if (filterTags.length > 0) {
       filteredArticles = filteredArticles.filter(({ article }) => {
         // Return true if every tag in 'filterTags' appears in the
         // artciles list of tags.
-        return filterTagValues.every(filterTag => {
+        return filterTags.every(filterTag => {
           return article.frontmatter.tags.includes(filterTag)
         })
       })
@@ -59,6 +73,11 @@ const ArticlesPage = () => {
 
     setDisplayedArticles(filteredArticles)
   }, [filterTerm, filterTags, articles])
+
+  // Used for custom display function of dropdown
+  function tagToString(tag) {
+    return `${tag.value} (${tag.count})`
+  }
 
   return (
     <Layout>
@@ -69,14 +88,18 @@ const ArticlesPage = () => {
           type="text"
           placeholder="Search"
           value={filterTerm}
-          onChange={e => setFilterTerm(e.target.value)}
+          onChange={e =>
+            // Set it to undefined if blank so that the query in the url disappears
+            setFilterTerm(e.target.value === "" ? undefined : e.target.value)
+          }
         />
         <Dropdown
           title="Filter by tags..."
           items={realTags}
           multiselect={true}
-          onSelectionChanged={onTagsChanged}
+          onSelectionChanged={tagsChangedCallback}
           displayFunction={tagToString}
+          defaultSelection={realTags.filter(t => filterTags.includes(t.value))}
         ></Dropdown>
       </section>
       <section className="card-container">

@@ -13,6 +13,7 @@
     "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-sass": "^2.8.0",
     "gatsby-plugin-sharp": "^2.11.1",
+    "gatsby-plugin-use-query-params": "^1.0.1",
     "gatsby-remark-embed-video": "^3.0.10",
     "gatsby-remark-images": "^3.8.0",
     "gatsby-remark-prismjs": "^3.10.0",
@@ -24,7 +25,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "use-query-params": "^1.1.9"
   },
   "devDependencies": {
     "prettier": "2.0.5"

@@ -12,13 +12,14 @@ const Dropdown = ({
   displayFunction = item => {
     return item.value
   },
+  defaultSelection = [],
 }) => {
   // Ref to the element for which we want to detect outside clicks
   const ref = useRef()
   useOnClickOutside(ref, () => toggle(false))
   // State
   const [open, setOpen] = useState(false)
-  const [selectedItems, setSelectedItems] = useState([])
+  const [selectedItems, setSelectedItems] = useState(defaultSelection)
 
   // Handles the state change in selectedItems
   // and passes the new values to the parent. Done in
