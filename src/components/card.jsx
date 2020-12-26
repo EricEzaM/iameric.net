@@ -16,19 +16,21 @@ const Card = ({
   // Wide list / multiple columns
   if (!vertical) {
     return (
-      <Link to={link} className={"card"}>
+      <div className={"card"}>
         <div className={"card__content"}>
-          {imgSrc && (
-            <img
-              className={"card__image"}
-              width="500"
-              height="250"
-              src={imgSrc}
-              alt="TODO something"
-            />
-          )}
-          {title && <h3 className={"card__title"}>{title}</h3>}
-          {body && <div className={"card__body"}>{body}</div>}
+          <Link to={link}>
+            {imgSrc && (
+              <img
+                className={"card__image"}
+                width="500"
+                height="250"
+                src={imgSrc}
+                alt="TODO something"
+              />
+            )}
+            {title && <h3 className={"card__title"}>{title}</h3>}
+            {body && <div className={"card__body"}>{body}</div>}
+          </Link>
         </div>
         <div className="card__meta">
           {metaText && <div className={"card__meta-text"}>{metaText}</div>}
@@ -41,7 +43,7 @@ const Card = ({
             </div>
           )}
         </div>
-      </Link>
+      </div>
     )
   }
   // Vertical list / one column
