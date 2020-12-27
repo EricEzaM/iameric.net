@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react"
+import React, { useState, useEffect } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import {
   useQueryParam,
@@ -41,18 +41,6 @@ const ArticlesPage = () => {
     withDefault(ArrayParam, [])
   )
 
-  // Called when the dropdown selected values change. Use a useCallback since passing
-  // this to the dropdown without it spammed the history and made page hang
-  const tagsChangedCallback = useCallback(
-    items => {
-      setFilterTags(
-        items.map(tag => tag.value),
-        "replaceIn"
-      )
-    },
-    [setFilterTags]
-  )
-
   // Updates filtered articles when filter term or tags change
   useEffect(() => {
     let filteredArticles = articles.edges.filter(({ article }) => {
@@ -77,6 +65,13 @@ const ArticlesPage = () => {
   // Used for custom display function of dropdown
   function tagToString(tag) {
     return `${tag.value} (${tag.count})`
+  }
+
+  function tagsChangedCallback(items) {
+    setFilterTags(
+      items.map(tag => tag.value),
+      "replaceIn"
+    )
   }
 
   return (

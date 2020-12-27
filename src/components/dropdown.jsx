@@ -21,14 +21,10 @@ const Dropdown = ({
   const [open, setOpen] = useState(false)
   const [selectedItems, setSelectedItems] = useState(defaultSelection)
 
-  // Handles the state change in selectedItems
-  // and passes the new values to the parent. Done in
-  // useEffect to avoid issues with render order which would
-  // arise if onSelectionChanged was called immediately after
-  // setSelectedItems
+  // Refresh selected items if the selection changes
   useEffect(() => {
-    onSelectionChanged(selectedItems)
-  }, [selectedItems, onSelectionChanged])
+    setSelectedItems(defaultSelection)
+  }, [defaultSelection])
 
   // Toggles the dropdown to be showing or not
   function toggle(open) {
@@ -45,6 +41,7 @@ const Dropdown = ({
       newSelectedItems = [...selectedItems, item]
     }
     setSelectedItems(newSelectedItems)
+    onSelectionChanged(newSelectedItems)
   }
 
   // Checks whether an item is selected
