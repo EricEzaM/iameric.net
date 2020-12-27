@@ -2,16 +2,16 @@ import React from "react"
 import { Link } from "gatsby"
 
 import LinkList from "./link-list"
-import { getCategoryUrl } from "../utils/category-url-conversion"
 
 const Card = ({
   link,
   title,
   metaText,
   body,
-  tags,
   imgSrc,
   vertical = false,
+  tagTitles = [],
+  tagLinks = [],
 }) => {
   // Wide list / multiple columns
   if (!vertical) {
@@ -34,12 +34,9 @@ const Card = ({
         </div>
         <div className="card__meta">
           {metaText && <div className={"card__meta-text"}>{metaText}</div>}
-          {tags && tags.length > 0 && (
+          {tagTitles && tagTitles.length > 0 && (
             <div>
-              <LinkList
-                titles={tags}
-                links={tags.map(e => "tag/" + getCategoryUrl(e))}
-              />
+              <LinkList titles={tagTitles} links={tagLinks} />
             </div>
           )}
         </div>
@@ -63,12 +60,9 @@ const Card = ({
           {title && <h3 className={"card__title"}>{title}</h3>}
           <div className="card__meta--vertical">
             {metaText && <div className={"card__meta-text"}>{metaText}</div>}
-            {tags && tags.length > 0 && (
+            {tagTitles && tagTitles.length > 0 && (
               <div>
-                <LinkList
-                  titles={tags}
-                  links={tags.map(e => "tag/" + getCategoryUrl(e))}
-                />
+                <LinkList titles={tagTitles} links={tagLinks} />
               </div>
             )}
           </div>

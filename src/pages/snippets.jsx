@@ -70,7 +70,6 @@ const SnippetsPage = () => {
                 body={excerpt}
                 imgSrc={"https://source.unsplash.com/random/250x250"}
                 metaText={frontmatter.date}
-                titles={[]}
               />
             )
           )}

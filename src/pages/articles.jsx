@@ -11,6 +11,7 @@ import Card from "../components/card"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Dropdown from "../components/dropdown"
+import { getCategoryUrl } from "../utils/category-url-conversion"
 
 const ArticlesPage = () => {
   const { articles, tags } = useStaticQuery(query)
@@ -104,9 +105,12 @@ const ArticlesPage = () => {
             link={a.frontmatter.slug}
             title={a.frontmatter.title}
             body={a.excerpt}
-            tags={a.frontmatter.tags}
             metaText={a.frontmatter.date}
             imgSrc={"https://source.unsplash.com/random/500x250"}
+            tagTitles={a.frontmatter.tags}
+            tagLinks={a.frontmatter.tags.map(
+              t => "articles?tags=" + getCategoryUrl(t)
+            )}
           />
         ))}
       </section>
