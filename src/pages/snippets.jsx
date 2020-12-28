@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { graphql, useStaticQuery } from "gatsby"
+import { useQueryParam, StringParam, withDefault } from "use-query-params"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -11,24 +12,29 @@ const SnippetsPage = () => {
 
   let cats = categories.group
 
-  const [category, setCategory] = useState("")
   const [displayedSnippets, setDisplayedSnippets] = useState(snippets.edges)
 
-  function onCategoryClicked(clickedCategory) {
-    if (clickedCategory === category) {
-      setCategory("")
-    } else {
-      setCategory(clickedCategory)
-    }
-  }
+  const [category, setCategory] = useQueryParam(
+    "category",
+    withDefault(StringParam, "")
+  )
 
   useEffect(() => {
     let filteredSnippets = snippets.edges.filter(({ snippet }) => {
-      return snippet.frontmatter.category === category || category === ""
+      let snipCat = getCategoryUrl(snippet.frontmatter.category)
+      return snipCat === category || category === undefined || category === ""
     })
 
     setDisplayedSnippets(filteredSnippets)
   }, [category, snippets])
+
+  function onCategoryClicked(clickedCategory) {
+    if (getCategoryUrl(clickedCategory) === category) {
+      setCategory(undefined)
+    } else {
+      setCategory(getCategoryUrl(clickedCategory))
+    }
+  }
 
   return (
     <Layout>
@@ -44,7 +50,7 @@ const SnippetsPage = () => {
               <button
                 className={[
                   "snippets-category-list__item",
-                  fieldValue === category ? "active" : "",
+                  getCategoryUrl(fieldValue) === category ? "active" : "",
                 ].join(" ")}
                 key={fieldValue}
                 onClick={e => onCategoryClicked(fieldValue, e)}
