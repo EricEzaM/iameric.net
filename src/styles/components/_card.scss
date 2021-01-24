@@ -1,6 +1,6 @@
 .card {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column nowrap;
   color: $g-color-off-white;
   padding: 1rem;
   border-radius: $g-border-radius-lg;
