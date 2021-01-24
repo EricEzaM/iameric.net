@@ -106,7 +106,7 @@ const ArticlesPage = () => {
             title={a.frontmatter.title}
             body={a.excerpt}
             metaText={a.frontmatter.date}
-            imgSrc={"https://source.unsplash.com/random/500x250"}
+            imgSrc={{ ...a.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
             tagTitles={a.frontmatter.tags}
             tagLinks={a.frontmatter.tags.map(
               t => "articles?tags=" + getCategoryUrl(t)
@@ -133,6 +133,13 @@ const query = graphql`
             title
             tags
             slug
+            headerImage {
+              childImageSharp {
+                fluid(quality: 100) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
             date(formatString: "MMMM Do, YYYY")
           }
           excerpt(pruneLength: 150)

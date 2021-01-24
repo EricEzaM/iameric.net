@@ -33,19 +33,17 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `snippets`,
-        path: `${__dirname}/content/snippets`,
-      },
-    },
-    /*
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
         name: `projects`,
         path: `${__dirname}/content/projects`,
       },
     },
-    */
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `snippets`,
+        path: `${__dirname}/content/snippets`,
+      },
+    },
     // Images
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,

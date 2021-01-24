@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+import Img from "gatsby-image"
 
 import LinkList from "./link-list"
 
@@ -20,12 +21,11 @@ const Card = ({
         <div className={"card__content"}>
           <Link to={link}>
             {imgSrc && (
-              <img
+              <Img
                 className={"card__image"}
-                width="500"
-                height="250"
-                src={imgSrc}
+                fluid={imgSrc}
                 alt="TODO something"
+                loading="eager"
               />
             )}
             {title && <h3 className={"card__title"}>{title}</h3>}
