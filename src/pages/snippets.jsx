@@ -5,6 +5,7 @@ import { useQueryParam, StringParam, withDefault } from "use-query-params"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Card from "../components/card"
+import ButtonGroup from "../components/button-group"
 import { getCategoryUrl } from "../utils/category-url-conversion"
 
 const SnippetsPage = () => {
@@ -28,11 +29,12 @@ const SnippetsPage = () => {
     setDisplayedSnippets(filteredSnippets)
   }, [category, snippets])
 
-  function onCategoryClicked(clickedCategory) {
-    if (getCategoryUrl(clickedCategory) === category) {
+  function onCategoryClicked(clickedCategory)
+  {
+    if (clickedCategory === category) {
       setCategory(undefined)
     } else {
-      setCategory(getCategoryUrl(clickedCategory))
+      setCategory(clickedCategory)
     }
   }
 
@@ -41,26 +43,18 @@ const SnippetsPage = () => {
       <SEO title="Snippets" />
       <div className="snippets-page-container">
         {/* Aside is inside div so that it's height is independent of section height */}
-        <div>
-          <aside
-            className="snippets-category-list"
-            style={{ textAlign: "right" }}
+        <aside>
+          <ButtonGroup
+            items={cats.map(c =>
+            ({
+              id: getCategoryUrl(c.fieldValue),
+              text: c.fieldValue
+            }))}
+            selectedItems={[category]}
+            onButtonClicked={id => onCategoryClicked(id)}
           >
-            {cats.map(({ fieldValue, totalCount }) => (
-              <button
-                className={[
-                  "snippets-category-list__item",
-                  getCategoryUrl(fieldValue) === category ? "active" : "",
-                ].join(" ")}
-                key={fieldValue}
-                onClick={e => onCategoryClicked(fieldValue, e)}
-              >
-                {fieldValue}
-              </button>
-            ))}
-            {<div className="snippets-category-list__spacer"></div>}
-          </aside>
-        </div>
+          </ButtonGroup>
+        </aside>
         <section className="card-container--vertical">
           {displayedSnippets.map(
             ({ snippet: { id, frontmatter, excerpt } }) => (
