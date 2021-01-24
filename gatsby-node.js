@@ -7,7 +7,7 @@
 // You can delete this file if you're not using it
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
-const { getCategoryUrl } = require(path.resolve(
+const { getUrlFriendlyName } = require(path.resolve(
   "./src/utils/category-url-conversion.jsx"
 ))
 
@@ -63,7 +63,7 @@ exports.createPages = async ({ graphql, actions }) => {
     const category = snippet.node.frontmatter.category
 
     createPage({
-      path: `snippets/${getCategoryUrl(category)}/${encodeURIComponent(slug)}`,
+      path: `snippets/${getUrlFriendlyName(category)}/${encodeURIComponent(slug)}`,
       component: snippetTemplate,
       context: {
         slug: slug,

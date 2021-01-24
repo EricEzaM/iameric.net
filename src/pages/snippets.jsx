@@ -6,7 +6,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Card from "../components/card"
 import ButtonGroup from "../components/button-group"
-import { getCategoryUrl } from "../utils/category-url-conversion"
+import { getUrlFriendlyName } from "../utils/category-url-conversion"
 
 const SnippetsPage = () => {
   const { snippets, categories } = useStaticQuery(query)
@@ -22,7 +22,7 @@ const SnippetsPage = () => {
 
   useEffect(() => {
     let filteredSnippets = snippets.edges.filter(({ snippet }) => {
-      let snipCat = getCategoryUrl(snippet.frontmatter.category)
+      let snipCat = getUrlFriendlyName(snippet.frontmatter.category)
       return snipCat === category || category === undefined || category === ""
     })
 
@@ -47,7 +47,7 @@ const SnippetsPage = () => {
           <ButtonGroup
             items={cats.map(c =>
             ({
-              id: getCategoryUrl(c.fieldValue),
+              id: getUrlFriendlyName(c.fieldValue),
               text: c.fieldValue
             }))}
             selectedItems={[category]}
@@ -62,7 +62,7 @@ const SnippetsPage = () => {
                 key={id}
                 vertical={true}
                 link={
-                  getCategoryUrl(frontmatter.category) +
+                  getUrlFriendlyName(frontmatter.category) +
                   "/" +
                   encodeURIComponent(frontmatter.slug)
                 }

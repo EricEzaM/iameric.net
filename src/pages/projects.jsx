@@ -5,7 +5,7 @@ import { useQueryParam, withDefault, ArrayParam } from "use-query-params"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Card from "../components/card"
-import { getCategoryUrl } from "../utils/category-url-conversion"
+import { getUrlFriendlyName } from "../utils/category-url-conversion"
 import ButtonGroup from "../components/button-group"
 
 const ProjectsPage = () =>
@@ -22,7 +22,7 @@ const ProjectsPage = () =>
     let filteredProjects = projects.edges.filter(({ project }) =>
     {
       debugger
-      let projectTags = project.frontmatter.tags.map(tag => getCategoryUrl(tag))
+      let projectTags = project.frontmatter.tags.map(tag => getUrlFriendlyName(tag))
       return projectTags.some(t => selectedTags.includes(t)) || selectedTags === undefined || selectedTags.length === 0
     })
 
@@ -54,7 +54,7 @@ const ProjectsPage = () =>
         <ButtonGroup
           items={tags.group.map(t =>
           ({
-            id: getCategoryUrl(t.fieldValue),
+            id: getUrlFriendlyName(t.fieldValue),
             text: t.fieldValue
           }))}
           selectedItems={selectedTags}

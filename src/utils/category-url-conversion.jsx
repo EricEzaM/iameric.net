@@ -1,17 +1,17 @@
-const specialCategoryUrls = {
+const specialNames = {
   "C#": "CSharp",
   "C++": "Cpp",
 }
 
 /**
- * Gets a custom url-friendly category name. E.g. C++ would encode to C%2B%2B. Using this, we encode as Cpp instead.
- * @param {string} categoryName The name to encode.
+ * Gets a custom url-friendly category/tag name. E.g. C++ would encode to C%2B%2B. Using this, we encode as Cpp instead.
+ * @param {string} name The name to encode.
  */
-function getCategoryUrl(categoryName) {
-  if (Object.keys(specialCategoryUrls).includes(categoryName)) {
-    return specialCategoryUrls[categoryName]
+function getUrlFriendlyName(name) {
+  if (Object.keys(specialNames).includes(name)) {
+    return specialNames[name]
   }
-  return categoryName
+  return name
 }
 
-module.exports = { getCategoryUrl }
+module.exports = { getUrlFriendlyName }

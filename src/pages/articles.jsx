@@ -11,7 +11,7 @@ import Card from "../components/card"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Dropdown from "../components/dropdown"
-import { getCategoryUrl } from "../utils/category-url-conversion"
+import { getUrlFriendlyName } from "../utils/category-url-conversion"
 
 const ArticlesPage = () => {
   const { articles, tags } = useStaticQuery(query)
@@ -109,7 +109,7 @@ const ArticlesPage = () => {
             imgSrc={{ ...a.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
             tagTitles={a.frontmatter.tags}
             tagLinks={a.frontmatter.tags.map(
-              t => "articles?tags=" + getCategoryUrl(t)
+              t => "articles?tags=" + getUrlFriendlyName(t)
             )}
           />
         ))}

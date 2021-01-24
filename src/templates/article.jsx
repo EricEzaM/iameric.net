@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 
 import Layout from "../components/layout"
 import LinkList from "../components/link-list"
-import { getCategoryUrl } from "../utils/category-url-conversion"
+import { getUrlFriendlyName } from "../utils/category-url-conversion"
 
 const Article = ({ data }) => {
   const post = data.post
@@ -16,7 +16,7 @@ const Article = ({ data }) => {
           <div className="article__meta">
             <LinkList
               titles={post.frontmatter.tags}
-              links={post.frontmatter.tags.map(e => "tag/" + getCategoryUrl(e))}
+              links={post.frontmatter.tags.map(e => "tag/" + getUrlFriendlyName(e))}
             />
             <time>Published {post.frontmatter.date}</time>
           </div>
