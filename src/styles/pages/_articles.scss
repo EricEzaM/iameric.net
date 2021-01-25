@@ -1,18 +1,14 @@
-.articles-filters {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 1rem;
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
 .searchbox {
+  width: 100%;
   padding: 5px 20px;
+  margin-bottom: 0.5em;
   min-height: 30px;
+  
+  font-style: italic;
   border-radius: 5px;
   border: solid 1px $g-color-grey-dark;
-  font-style: italic;
   background-color: $g-color-white;
+
 
   &:focus {
     border-color: $g-color-main;

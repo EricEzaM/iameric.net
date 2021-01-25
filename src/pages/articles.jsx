@@ -10,75 +10,78 @@ import {
 import Card from "../components/card"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Dropdown from "../components/dropdown"
 import { getUrlFriendlyName } from "../utils/category-url-conversion"
+import ButtonGroup from "../components/button-group"
 
 const ArticlesPage = () => {
-  const { articles, tags } = useStaticQuery(query)
+  const { articles, tags: queryTags } = useStaticQuery(query)
 
-  const realTags = tags.group.map((tag, idx) => ({
-    id: idx,
-    value: tag.fieldValue,
-    count: tag.totalCount,
-  }))
-
-  // Sort in-place by tag name alphabetically
-  realTags.sort(function (a, b) {
-    let atag = a.value.toLowerCase()
-    let btag = b.value.toLowerCase()
-    if (atag < btag) return -1
-    if (atag > btag) return 1
-    return 0
-  })
+  const tags = queryTags.group
+    // Map to the representation that the button group expects.
+    .map(tag => ({
+      id: getUrlFriendlyName(tag.fieldValue),
+      text: `${tag.fieldValue} (${tag.totalCount})`,
+    }))
+    // Sort alphabetically
+    .sort((a, b) =>
+    {
+      let atag = a.text.toLowerCase()
+      let btag = b.text.toLowerCase()
+      if (atag < btag) return -1
+      if (atag > btag) return 1
+      return 0
+    })
 
   const [displayedArticles, setDisplayedArticles] = useState(articles.edges)
   // Use URL query string to store state of filter term and tags
   const [filterTerm, setFilterTerm] = useQueryParam(
-    "term",
+    "q",
     withDefault(StringParam, "")
   )
-  const [filterTags, setFilterTags] = useQueryParam(
+  const [selectedTags, setSelectedTags] = useQueryParam(
     "tags",
     withDefault(ArrayParam, [])
   )
 
-  // Updates filtered articles when filter term or tags change
-  useEffect(() => {
+  useEffect(() =>
+  {
+    // Filter Term
     let filteredArticles = articles.edges.filter(({ article }) => {
       return article.frontmatter.title
         .toLowerCase()
         .includes(filterTerm.toLowerCase())
     })
 
-    if (filterTags.length > 0) {
-      filteredArticles = filteredArticles.filter(({ article }) => {
-        // Return true if every tag in 'filterTags' appears in the
-        // artciles list of tags.
-        return filterTags.every(filterTag => {
-          return article.frontmatter.tags.includes(filterTag)
-        })
-      })
-    }
+    // Filter Tags
+    filteredArticles = filteredArticles.filter(({ article }) =>
+    {
+      let articleTags = article.frontmatter.tags.map(tag => getUrlFriendlyName(tag))
+      return articleTags.some(t => selectedTags.includes(t)) || selectedTags === undefined || selectedTags.length === 0
+    })
 
     setDisplayedArticles(filteredArticles)
-  }, [filterTerm, filterTags, articles])
+  }, [filterTerm, selectedTags, articles])
 
-  // Used for custom display function of dropdown
-  function tagToString(tag) {
-    return `${tag.value} (${tag.count})`
-  }
-
-  function tagsChangedCallback(items) {
-    setFilterTags(
-      items.map(tag => tag.value),
-      "replaceIn"
-    )
+  function onTagClicked(tagId)
+  {
+    if (selectedTags.includes(tagId)) {
+      let newTags = selectedTags.filter(t => t !== tagId)
+      if (newTags.length > 0) {
+        setSelectedTags(newTags)
+      }
+      else {
+        setSelectedTags(undefined)
+      }
+    }
+    else {
+      setSelectedTags([...selectedTags, tagId])
+    }
   }
 
   return (
     <Layout>
       <SEO title="Articles" />
-      <section className="articles-filters">
+      <section>
         <input
           className="searchbox"
           type="text"
@@ -89,14 +92,11 @@ const ArticlesPage = () => {
             setFilterTerm(e.target.value === "" ? undefined : e.target.value)
           }
         />
-        <Dropdown
-          title="Filter by tags..."
-          items={realTags}
-          multiselect={true}
-          onSelectionChanged={tagsChangedCallback}
-          displayFunction={tagToString}
-          defaultSelection={realTags.filter(t => filterTags.includes(t.value))}
-        ></Dropdown>
+        <ButtonGroup
+          items={tags}
+          selectedItems={selectedTags}
+          onButtonClicked={onTagClicked}
+        />
       </section>
       <section className="card-container">
         {displayedArticles.map(({ article: a }) => (
@@ -146,8 +146,10 @@ const query = graphql`
         }
       }
     }
-    tags: allMarkdownRemark {
-      group(field: frontmatter___tags) {
+    tags: allMarkdownRemark (
+      filter: { frontmatter: { template: {eq : "article"} } } 
+    ) {
+      group(field: frontmatter___tags){
         fieldValue
         totalCount
       }
