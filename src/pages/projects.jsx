@@ -107,8 +107,8 @@ const query = graphql`
         }
       }
     }
-  tags: allMarkdownRemark (
-    filter: { frontmatter: { template: {eq : "project"} } } 
+    tags: allMarkdownRemark (
+      filter: { frontmatter: { template: {eq : "project"} } } 
     ) {
       group(field: frontmatter___tags){
         fieldValue
