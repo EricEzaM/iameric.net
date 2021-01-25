@@ -22,10 +22,7 @@ const ButtonGroup = ({
   onButtonClicked = (id) => { } }) =>
 {
   return (
-    <div
-      className="button-list"
-      style={{ textAlign: "right" }}
-    >
+    <div className="button-list">
       {items.map(({ id, text }) =>
       (
         <button
