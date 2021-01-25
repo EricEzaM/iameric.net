@@ -22,12 +22,12 @@ const ButtonGroup = ({
   onButtonClicked = (id) => { } }) =>
 {
   return (
-    <div className="button-list">
+    <div className="button-group">
       {items.map(({ id, text }) =>
       (
         <button
           className={[
-            "button-list__item",
+            "button-group__item",
             selectedItems.includes(id) ? "active" : "",
           ].join(" ")}
           key={text}
@@ -36,7 +36,6 @@ const ButtonGroup = ({
           {text}
         </button>
       ))}
-      <div className="button-list__spacer"></div>
     </div>
   )
 }
