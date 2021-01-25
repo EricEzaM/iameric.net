@@ -24,8 +24,7 @@ const Card = ({
               <Img
                 className={"card__image"}
                 fluid={imgSrc}
-                alt="TODO something"
-                loading="eager"
+                alt={ `Image for ${title}` }
               />
             )}
             {title && <h3 className={"card__title"}>{title}</h3>}
