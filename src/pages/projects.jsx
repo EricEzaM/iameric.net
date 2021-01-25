@@ -33,7 +33,7 @@ const ProjectsPage = () =>
   {
     if (selectedTags.includes(tag))
     {
-      let newTags = selectedTags.filter(t => t != tag)
+      let newTags = selectedTags.filter(t => t !== tag)
       if (newTags.length > 0) {
         setSelectedTags(newTags)
       }
@@ -97,7 +97,7 @@ const query = graphql`
             headerImage {
               childImageSharp {
                 fluid(quality: 100) {
-                  ...GatsbyImageSharpFluid_noBase64
+                  ...GatsbyImageSharpFluid
                 }
               }
             }
