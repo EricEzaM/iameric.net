@@ -32,6 +32,7 @@ const ArticlesPage = () => {
       return 0
     })
 
+  const [showTags, setShowTags] = useState(false)
   const [displayedArticles, setDisplayedArticles] = useState(articles.edges)
   // Use URL query string to store state of filter term and tags
   const [filterTerm, setFilterTerm] = useQueryParam(
@@ -82,21 +83,36 @@ const ArticlesPage = () => {
     <Layout>
       <SEO title="Articles" />
       <section>
-        <input
-          className="searchbox"
-          type="text"
-          placeholder="Search"
-          value={filterTerm}
-          onChange={e =>
-            // Set it to undefined if blank so that the query in the url disappears
-            setFilterTerm(e.target.value === "" ? undefined : e.target.value)
-          }
-        />
-        <ButtonGroup
-          items={tags}
-          selectedItems={selectedTags}
-          onButtonClicked={onTagClicked}
-        />
+        <div className="searchbar">
+          <input
+            className="searchbox"
+            type="text"
+            placeholder="Search"
+            value={filterTerm}
+            onChange={e =>
+              // Set it to undefined if blank so that the query in the url disappears
+              setFilterTerm(e.target.value === "" ? undefined : e.target.value)
+            }
+          />
+          <button className={[
+              "tags-button",
+              showTags ? "active" : "",
+            ].join(" ")}
+            onClick={ e => setShowTags(!showTags) }
+          >
+            { showTags ? "Hide Tags" : "Show Tags" }
+          </button>
+        </div>
+        <div className={[
+              "tags-list",
+              showTags ? "active" : "",
+            ].join(" ")}>
+          <ButtonGroup
+            items={tags}
+            selectedItems={selectedTags}
+            onButtonClicked={onTagClicked}
+          />
+        </div>
       </section>
       <section className="card-container">
         {displayedArticles.map(({ article: a }) => (

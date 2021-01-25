@@ -1,7 +1,14 @@
+.searchbar {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+
+  margin-bottom: 0.5em;
+}
+
 .searchbox {
   width: 100%;
   padding: 5px 2.5em;
-  margin-bottom: 0.5em;
   min-height: 30px;
   
   border-radius: 5px;
@@ -13,5 +20,21 @@
 
   &:focus {
     border-color: $g-color-main;
+  }
+}
+
+.tags-button {
+  @include button($g-color-grey-dark, $g-color-light-grey, $g-color-grey-dark, $g-color-white);
+
+  min-width: 8em; // To avoid changes in width when switching text
+  text-align: center;
+  white-space: nowrap;
+}
+
+.tags-list {
+  display: none;
+  
+  &.active {
+    display: block;
   }
 }
