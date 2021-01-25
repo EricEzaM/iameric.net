@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 
-import CaretDownIcon from "../images/caret-down.svg"
-import CaretUpIcon from "../images/caret-up.svg"
+import CaretDownIcon from "../images/svg/caret-down.svg"
+import CaretUpIcon from "../images/svg/caret-up.svg"
 import useOnClickOutside from "../hooks/useOnClickOutside"
 
 const Dropdown = ({
