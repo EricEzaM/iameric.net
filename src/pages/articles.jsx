@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
+import Img from "gatsby-image"
 import {
   useQueryParam,
   ArrayParam,
@@ -7,7 +8,7 @@ import {
   withDefault,
 } from "use-query-params"
 
-import Card from "../components/card"
+import LinkList from "../components/link-list";
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { getUrlFriendlyName } from "../utils/category-url-conversion"
@@ -61,6 +62,10 @@ const ArticlesPage = () => {
     })
 
     setDisplayedArticles(filteredArticles)
+
+    if (selectedTags.length > 0) {
+      setShowTags(true)
+    }
   }, [filterTerm, selectedTags, articles])
 
   function onTagClicked(tagId)
@@ -82,7 +87,7 @@ const ArticlesPage = () => {
   return (
     <Layout>
       <SEO title="Articles" />
-      <section>
+      <section className="filters-container">
         <div className="searchbar">
           <input
             className="searchbox"
@@ -116,18 +121,19 @@ const ArticlesPage = () => {
       </section>
       <section className="card-container">
         {displayedArticles.map(({ article: a }) => (
-          <Card
-            key={a.id}
-            link={a.frontmatter.slug}
-            title={a.frontmatter.title}
-            body={a.excerpt}
-            metaText={a.frontmatter.date}
-            imgSrc={{ ...a.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
-            tagTitles={a.frontmatter.tags}
-            tagLinks={a.frontmatter.tags.map(
-              t => "articles?tags=" + getUrlFriendlyName(t)
-            )}
-          />
+          <div className="card">
+            <Link to={a.frontmatter.slug}>
+              <Img
+                className={"card__image"}
+                fluid={{ ...a.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
+                alt={ `Image for ${a.frontmatter.title}` }
+              />
+              <h3 className={"card__title"}>{a.frontmatter.title}</h3>
+              <div className={"card__body"}>{a.excerpt}</div>
+            </Link>
+            <date className={"card__date"}>{a.frontmatter.date}</date>
+            <LinkList titles={a.frontmatter.tags} links={a.frontmatter.tags.map(t => "articles?tags=" + getUrlFriendlyName(t))} />
+          </div>
         ))}
       </section>
     </Layout>

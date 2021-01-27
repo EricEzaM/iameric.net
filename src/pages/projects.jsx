@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery, Link } from "gatsby"
+import Img from "gatsby-image"
 import { useQueryParam, withDefault, ArrayParam } from "use-query-params"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Card from "../components/card"
+import LinkList from "../components/link-list"
 import { getUrlFriendlyName } from "../utils/category-url-conversion"
 import ButtonGroup from "../components/button-group"
 
@@ -50,7 +51,7 @@ const ProjectsPage = () =>
   return (
     <Layout>
       <SEO title="Projects" />
-      <aside>
+      <aside className="filters-container">
         <ButtonGroup
           items={tags.group.map(t =>
           ({
@@ -63,16 +64,19 @@ const ProjectsPage = () =>
       </aside>
       <section className="card-container">
         {displayedProjects.map(({ project: p }) => (
-          <Card
-            key={p.id}
-            link={p.frontmatter.slug}
-            title={p.frontmatter.title}
-            body={p.excerpt}
-            metaText={p.frontmatter.date}
-            imgSrc={{ ...p.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
-            tagTitles={p.frontmatter.tags}
-            tagLinks={p.frontmatter.tags}
-          />
+          <div className="card">
+            <Link to={p.frontmatter.slug}>
+              <Img
+                className={"card__image"}
+                fluid={{ ...p.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
+                alt={ `Image for ${p.frontmatter.title}` }
+              />
+              <h3 className={"card__title"}>{p.frontmatter.title}</h3>
+              <div className={"card__body"}>{p.excerpt}</div>
+            </Link>
+            <date className={"card__date"}>{p.frontmatter.date}</date>
+            <LinkList titles={p.frontmatter.tags} links={p.frontmatter.tags.map(t => "articles?tags=" + getUrlFriendlyName(t))} />
+          </div>
         ))}
       </section>
     </Layout>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery, Link } from "gatsby"
 import { useQueryParam, StringParam, withDefault } from "use-query-params"
+import Img from "gatsby-image"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Card from "../components/card"
 import ButtonGroup from "../components/button-group"
 import { getUrlFriendlyName } from "../utils/category-url-conversion"
 
@@ -43,7 +43,7 @@ const SnippetsPage = () => {
       <SEO title="Snippets" />
       <div className="snippets-page-container">
         {/* Aside is inside div so that it's height is independent of section height */}
-        <aside>
+        <aside className="filters-container">
           <ButtonGroup
             items={cats.map(c =>
             ({
@@ -58,19 +58,22 @@ const SnippetsPage = () => {
         <section className="card-container--vertical">
           {displayedSnippets.map(
             ({ snippet: { id, frontmatter, excerpt } }) => (
-              <Card
-                key={id}
-                vertical={true}
-                link={
-                  getUrlFriendlyName(frontmatter.category) +
-                  "/" +
-                  encodeURIComponent(frontmatter.slug)
-                }
-                title={frontmatter.title}
-                body={excerpt}
-                imgSrc={"https://source.unsplash.com/random/250x250"}
-                metaText={frontmatter.date}
-              />
+              <div className="card card--narrow">
+                <Link
+                  to={`${getUrlFriendlyName(frontmatter.category)}/${frontmatter.slug}`}
+                  className="card__content card__content--vertical"
+                >
+                  <Img
+                    className={"card__image--vertical"}
+                    fluid={{ ...frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
+                    alt={ `Image for ${frontmatter.title}` }
+                  />
+                  <div>
+                    <h3 className={"card__title card__title--vertical"}>{frontmatter.title}</h3>
+                    <date className={"card__date"}>{frontmatter.date}</date>
+                  </div>
+                </Link>
+              </div>
             )
           )}
         </section>
@@ -94,6 +97,13 @@ const query = graphql`
             title
             slug
             category
+            headerImage {
+              childImageSharp {
+                fluid(quality: 100){
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
             date(formatString: "MMMM Do, YYYY")
           }
           excerpt(pruneLength: 200)

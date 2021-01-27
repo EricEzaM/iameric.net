@@ -2,8 +2,6 @@
   display: flex;
   flex-direction: row;
   gap: 0.5em;
-
-  margin-bottom: 0.5em;
 }
 
 .searchbox {
@@ -32,6 +30,7 @@
 }
 
 .tags-list {
+  margin-top: 1em;
   display: none;
   
   &.active {
