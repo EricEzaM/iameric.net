@@ -1,0 +1,30 @@
+.section-title {
+  margin: 0.5em 0;
+
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  
+  transition: all $trans-spd-med ease-in-out;
+  
+  a {
+    * {
+      color: $g-color-grey;
+    }
+    margin-left: 0.5em;
+    border-radius: $g-border-radius;
+    background-color: $g-color-lighter-grey;
+    padding: 0.1em 0.4em;
+
+    &:hover {
+      * {
+        color: $g-color-grey-dark;
+      }
+      background-color: $g-color-light-grey;
+    }
+  }
+}
+
+.subtitle {
+  text-align: center;
+}
