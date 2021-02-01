@@ -19,7 +19,7 @@ const Nav = () => {
     <nav className="nav">
       <Link to="/">
         <Img
-          style={{ width: "40%", margin: "auto" }}
+          className="nav__image"
           fluid={headerImage.image.childImageSharp.fluid}
           alt="header"
           loading="eager"
