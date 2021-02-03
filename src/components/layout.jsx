@@ -10,6 +10,9 @@ import PropTypes from "prop-types"
 
 import "../styles/main.scss"
 import Nav from "./nav"
+import MailIcon from "../images/svg/mail.svg"
+import GatsbyIcon from "../images/svg/gatsby.svg"
+import GithubIcon from "../images/svg/github.svg"
 
 const Layout = ({ children }) => {
   return (
@@ -23,11 +26,19 @@ const Layout = ({ children }) => {
       >
         <Nav />
         <main>{children}</main>
-        {/* TODO: Better solution than static 40px */}
-        <footer style={{ marginTop: "40px" }}>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
+        <footer>
+          <div className="footer-links">
+            <a href="mailto:eric@iameric.net" title="Send me an email">
+              <MailIcon/>
+            </a>
+            <a href="https://github.com/EricEzaM" title="View my Github">
+              <GithubIcon/>
+            </a>
+            <a href="https://www.gatsbyjs.com/" title="Built with GatsbyJS">
+              <GatsbyIcon/>
+            </a>
+          </div>
+          © {new Date().getFullYear()}
         </footer>
       </div>
     </>
