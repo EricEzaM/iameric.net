@@ -22,7 +22,6 @@ const ProjectsPage = () =>
   useEffect(() => {
     let filteredProjects = projects.edges.filter(({ project }) =>
     {
-      debugger
       let projectTags = project.frontmatter.tags.map(tag => getUrlFriendlyName(tag))
       return projectTags.some(t => selectedTags.includes(t)) || selectedTags === undefined || selectedTags.length === 0
     })
@@ -64,7 +63,7 @@ const ProjectsPage = () =>
       </aside>
       <section className="card-container">
         {displayedProjects.map(({ project: p }) => (
-          <div className="card">
+          <div className="card" key={p.id}>
             <Link to={p.frontmatter.slug}>
               <Img
                 className={"card__image"}

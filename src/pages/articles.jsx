@@ -121,7 +121,7 @@ const ArticlesPage = () => {
       </section>
       <section className="card-container">
         {displayedArticles.map(({ article: a }) => (
-          <div className="card">
+          <div className="card" key={a.id}>
             <Link to={a.frontmatter.slug}>
               <Img
                 className={"card__image"}

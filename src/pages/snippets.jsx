@@ -62,20 +62,20 @@ const SnippetsPage = () => {
         </aside>
         <section className="card-container--vertical">
           {displayedSnippets.map(
-            ({ snippet: { id, frontmatter, excerpt } }) => (
-              <div className="card card--narrow">
+            ({ snippet: s }) => (
+              <div className="card card--narrow" key={s.id}>
                 <Link
-                  to={`${getUrlFriendlyName(frontmatter.category)}/${frontmatter.slug}`}
+                  to={`${getUrlFriendlyName(s.frontmatter.category)}/${s.frontmatter.slug}`}
                   className="card__content card__content--vertical"
                 >
                   <Img
                     className={"card__image--vertical"}
-                    fluid={{ ...frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
-                    alt={ `Image for ${frontmatter.title}` }
+                    fluid={{ ...s.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
+                    alt={ `Image for ${s.frontmatter.title}` }
                   />
                   <div>
-                    <h3 className={"card__title card__title--vertical"}>{frontmatter.title}</h3>
-                    <date className={"card__date"}>{frontmatter.date}</date>
+                    <h3 className={"card__title card__title--vertical"}>{s.frontmatter.title}</h3>
+                    <date className={"card__date"}>{s.frontmatter.date}</date>
                   </div>
                 </Link>
               </div>
