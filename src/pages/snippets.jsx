@@ -41,6 +41,11 @@ const SnippetsPage = () => {
   return (
     <Layout>
       <SEO title="Snippets" />
+
+      <div>
+        Pieces of code which don't fit the longer format of artciles. Kind of like Github Gists, but they can include some paragraph content for additional context, and be categorised.
+      </div>
+
       <div className="snippets-page-container">
         {/* Aside is inside div so that it's height is independent of section height */}
         <aside className="filters-container">
