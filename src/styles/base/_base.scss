@@ -22,6 +22,24 @@ a {
   text-decoration: none;
 }
 
+// Used for links in the about page... is there a better way to do this?
+p a {
+  text-decoration: none;
+  background: linear-gradient(
+    transparent 85%,
+    mix($g-color-main, transparent, 40%) 0
+  );
+
+  transition: all $trans-spd-med;
+
+  &:hover {
+    background: linear-gradient(
+      transparent 85%,
+      mix($g-color-main, transparent, 80%) 0
+    );
+  }
+}
+
 hr {
   border: 1px solid $g-color-main;
 }
