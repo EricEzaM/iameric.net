@@ -1,11 +1,17 @@
+$gap: 0.5em;
+
 .button-group {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 0.5rem 0.5rem;
+
+  // To get around using the gap property, which is not very well supported yet.
+  margin: calc(-1 * #{$gap}) 0 0 calc(-1 * #{$gap});
+  // width: calc(100% + #{$gap});
 
   &__item {
     @include button($g-color-main, $g-color-main-light, $g-color-main, $g-color-white);
+    margin: $gap 0 0 $gap;
   }
 }
