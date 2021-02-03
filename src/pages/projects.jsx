@@ -73,7 +73,7 @@ const ProjectsPage = () =>
               <h3 className={"card__title"}>{p.frontmatter.title}</h3>
               <div className={"card__body"}>{p.excerpt}</div>
             </Link>
-            <date className={"card__date"}>{p.frontmatter.date}</date>
+            <time className={"card__date"}>{p.frontmatter.date}</time>
             <LinkList titles={p.frontmatter.tags} links={p.frontmatter.tags.map(t => "articles?tags=" + getUrlFriendlyName(t))} />
           </div>
         ))}

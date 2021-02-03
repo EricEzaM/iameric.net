@@ -75,7 +75,7 @@ const SnippetsPage = () => {
                   />
                   <div>
                     <h3 className={"card__title card__title--vertical"}>{s.frontmatter.title}</h3>
-                    <date className={"card__date"}>{s.frontmatter.date}</date>
+                    <time className={"card__date"}>{s.frontmatter.date}</time>
                   </div>
                 </Link>
               </div>

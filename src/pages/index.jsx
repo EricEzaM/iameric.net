@@ -40,7 +40,7 @@ const IndexPage = () => {
                 <h3 className={"card__title"}>{a.frontmatter.title}</h3>
                 <div className={"card__body"}>{a.excerpt}</div>
               </Link>
-              <date className={"card__date"}>{a.frontmatter.date}</date>
+              <time className={"card__date"}>{a.frontmatter.date}</time>
               <LinkList titles={a.frontmatter.tags} links={a.frontmatter.tags.map(t => "articles?tags=" + getUrlFriendlyName(t))} />
             </div>
           ))}
@@ -66,7 +66,7 @@ const IndexPage = () => {
                 <h3 className={"card__title"}>{p.frontmatter.title}</h3>
                 <div className={"card__body"}>{p.excerpt}</div>
               </Link>
-              <date className={"card__date"}>{p.frontmatter.date}</date>
+              <time className={"card__date"}>{p.frontmatter.date}</time>
               <LinkList titles={p.frontmatter.tags} links={p.frontmatter.tags.map(t => "articles?tags=" + getUrlFriendlyName(t))} />
             </div>
           ))}
@@ -95,7 +95,7 @@ const IndexPage = () => {
                   />
                   <div>
                     <h3 className={"card__title card__title--vertical"}>{s.frontmatter.title}</h3>
-                    <date className={"card__date"}>{s.frontmatter.date}</date>
+                    <time className={"card__date"}>{s.frontmatter.date}</time>
                   </div>
                 </Link>
               </div>
