@@ -23,7 +23,6 @@
 
   &__meta {
     color: $g-color-main-light;
-    font-size: small;
     display: flex;
     justify-content: space-between;
 
@@ -35,6 +34,7 @@
   }
 
   &__body {
+    font-size: large;
     line-height: 2;
 
     & img {
