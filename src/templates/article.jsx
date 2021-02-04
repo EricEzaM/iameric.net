@@ -16,7 +16,7 @@ const Article = ({ data }) => {
           <div className="article__meta">
             <LinkList
               titles={post.frontmatter.tags}
-              links={post.frontmatter.tags.map(e => "tag/" + getUrlFriendlyName(e))}
+              links={post.frontmatter.tags.map(e => "articles?tags=" + getUrlFriendlyName(e))}
             />
             <time>Published {post.frontmatter.date}</time>
           </div>
