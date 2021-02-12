@@ -20,7 +20,12 @@ const Article = ({ data }) => {
             />
             <time>Published {post.frontmatter.date}</time>
           </div>
-          <Img fluid={post.frontmatter.headerImage.childImageSharp.fluid} />
+          <Img
+            fluid={post.frontmatter.headerImage.childImageSharp.fluid}
+            imgStyle={{
+              objectPosition: "top center"
+            }}
+          />
         </div>
         <div
           className="article__body"

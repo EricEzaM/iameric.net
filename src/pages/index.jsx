@@ -35,7 +35,10 @@ const IndexPage = () => {
                 <Img
                   className={"card__image"}
                   fluid={{ ...a.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
-                  alt={ `Image for ${a.frontmatter.title}` }
+                  alt={`Image for ${a.frontmatter.title}`}
+                  imgStyle={{
+                    objectPosition: "top center"
+                  }}
                 />
                 <h3 className={"card__title"}>{a.frontmatter.title}</h3>
                 <div className={"card__body"}>{a.excerpt}</div>
@@ -61,7 +64,10 @@ const IndexPage = () => {
                 <Img
                   className={"card__image"}
                   fluid={{ ...p.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
-                  alt={ `Image for ${p.frontmatter.title}` }
+                  alt={`Image for ${p.frontmatter.title}`}
+                  imgStyle={{
+                    objectPosition: "top center"
+                  }}
                 />
                 <h3 className={"card__title"}>{p.frontmatter.title}</h3>
                 <div className={"card__body"}>{p.excerpt}</div>
@@ -91,7 +97,10 @@ const IndexPage = () => {
                   <Img
                     className={"card__image--vertical"}
                     fluid={{ ...s.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
-                    alt={ `Image for ${s.frontmatter.title}` }
+                      alt={`Image for ${s.frontmatter.title}`}
+                      imgStyle={{
+                        objectPosition: "top center"
+                      }}
                   />
                   <div>
                     <h3 className={"card__title card__title--vertical"}>{s.frontmatter.title}</h3>

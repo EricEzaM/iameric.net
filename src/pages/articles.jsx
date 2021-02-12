@@ -126,7 +126,10 @@ const ArticlesPage = () => {
               <Img
                 className={"card__image"}
                 fluid={{ ...a.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
-                alt={ `Image for ${a.frontmatter.title}` }
+                alt={`Image for ${a.frontmatter.title}`}
+                imgStyle={{
+                  objectPosition: "top center"
+                }}
               />
               <h3 className={"card__title"}>{a.frontmatter.title}</h3>
               <div className={"card__body"}>{a.excerpt}</div>

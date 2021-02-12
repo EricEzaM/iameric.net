@@ -68,7 +68,10 @@ const ProjectsPage = () =>
               <Img
                 className={"card__image"}
                 fluid={{ ...p.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
-                alt={ `Image for ${p.frontmatter.title}` }
+                alt={`Image for ${p.frontmatter.title}`}
+                imgStyle={{
+                  objectPosition: "top center"
+                }}
               />
               <h3 className={"card__title"}>{p.frontmatter.title}</h3>
               <div className={"card__body"}>{p.excerpt}</div>
