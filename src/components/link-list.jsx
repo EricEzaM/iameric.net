@@ -5,7 +5,7 @@ const LinkList = ({ titles, links }) => {
   return (
     <>
       {titles && titles.length === links.length && (
-        <span>
+        <span className="link-list">
           {titles.map((e, i, arr) => (
             // React fragment = <>, </>
             <React.Fragment key={i}>
