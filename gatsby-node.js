@@ -14,6 +14,7 @@ const { getUrlFriendlyName } = require(path.resolve(
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const articleTemplate = path.resolve(`./src/templates/article.jsx`)
+  const projectTemplate = path.resolve(`./src/templates/project.jsx`)
   const snippetTemplate = path.resolve(`./src/templates/snippet.jsx`)
 
   const result = await graphql(`
@@ -44,6 +45,9 @@ exports.createPages = async ({ graphql, actions }) => {
   const snippets = allMarkdown.filter(
     ({ node }) => node.frontmatter.template == "snippet"
   )
+  const projects = allMarkdown.filter(
+    ({ node }) => node.frontmatter.template == "project"
+  )
   const tags = result.data.allMarkdownRemark.tags
 
   articles.forEach(article => {
@@ -55,6 +59,18 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         slug: slug,
       },
+    })
+  })
+
+  projects.forEach(project => {
+    const slug = project.node.frontmatter.slug
+
+    createPage({
+      path: `projects/${slug}`,
+      component: projectTemplate,
+      context: {
+        slug: slug
+      }
     })
   })
 
@@ -71,4 +87,21 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
+}
+
+exports.createSchemaCustomization = ({ actions }) =>
+{
+  const { createTypes } = actions
+  const typeDefs = `
+    type MarkdownRemark implements Node {
+      frontmatter: Frontmatter
+    }
+
+    type Frontmatter {
+      url: String
+      github: String
+    }
+  `
+
+  createTypes(typeDefs)
 }
