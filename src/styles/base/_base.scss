@@ -110,4 +110,14 @@ hr {
 ul,
 ol {
   padding-inline-start: 40px;
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+li {
+  ul {
+    margin-bottom: 0;
+  }
 }

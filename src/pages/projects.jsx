@@ -107,7 +107,7 @@ const query = graphql`
                 }
               }
             }
-            date(formatString: "MMMM Do, YYYY")
+            date(formatString: "MMMM YYYY")
           }
           excerpt(pruneLength: 150)
         }
