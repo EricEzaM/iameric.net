@@ -65,7 +65,7 @@ const SnippetsPage = () => {
             ({ snippet: s }) => (
               <div className="card card--narrow" key={s.id}>
                 <Link
-                  to={`${getUrlFriendlyName(s.frontmatter.category)}/${s.frontmatter.slug}`}
+                  to={s.frontmatter.slug}
                   className="card__content card__content--vertical"
                 >
                   <Img

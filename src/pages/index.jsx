@@ -91,7 +91,7 @@ const IndexPage = () => {
               ({ snippet: s }) => (
                 <div className="card card--narrow" key={s.id}>
                   <Link
-                    to={`snippets/${getUrlFriendlyName(s.frontmatter.category)}/${s.frontmatter.slug}`}
+                    to={`snippets/${s.frontmatter.slug}`}
                     className="card__content card__content--vertical"
                   >
                   <Img

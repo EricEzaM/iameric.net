@@ -48,7 +48,6 @@ exports.createPages = async ({ graphql, actions }) => {
   const projects = allMarkdown.filter(
     ({ node }) => node.frontmatter.template == "project"
   )
-  const tags = result.data.allMarkdownRemark.tags
 
   articles.forEach(article => {
     const slug = article.node.frontmatter.slug
@@ -79,7 +78,7 @@ exports.createPages = async ({ graphql, actions }) => {
     const category = snippet.node.frontmatter.category
 
     createPage({
-      path: `snippets/${getUrlFriendlyName(category)}/${encodeURIComponent(slug)}`,
+      path: `snippets/${slug}`,
       component: snippetTemplate,
       context: {
         slug: slug,
