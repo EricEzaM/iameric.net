@@ -39,7 +39,7 @@
   }
 
   &__body {
-    font-size: small;
+    font-size: 0.8em;
     line-height: 1.6;
     color: $g-color-light-grey;
     margin-bottom: 0.5em;
@@ -74,7 +74,6 @@
   &__date {
     margin-top: auto;
     color: $g-color-main-light;
-    font-size: medium;
   }
 }
 
