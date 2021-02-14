@@ -23,6 +23,12 @@ $prism-keyword: #39b3fa;
 $prism-property: #b5cea8;
 $prism-comment: #93a19a;
 
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	color: $prism-background !important;
+  background: $prism-text-base !important;
+}
+
 pre[class*="language-"],
 code[class*="language-"] {
   color: $prism-text-base;
