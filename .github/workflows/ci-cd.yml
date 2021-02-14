@@ -1,0 +1,29 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  build:
+    name: Build Gatsby
+    runs-on: ubuntu-latest
+      
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          submodules: true
+      - name: Build Gatsby
+        uses: jzweifel/gatsby-cli-github-action@master
+        with:
+          gatsby-arg: build
+
+        # GH Pages Deployment
+      - name: GH Pages Deployment
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: ./public
+          SINGLE_COMMIT: true
