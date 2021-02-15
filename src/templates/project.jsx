@@ -2,6 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 
+import SEO from "../components/seo"
 import Layout from "../components/layout"
 import LinkList from "../components/link-list"
 import ExternalLinkIcon from "../images/svg/external-link.svg"
@@ -9,9 +10,9 @@ import { getUrlFriendlyName } from "../utils/category-url-conversion"
 
 const Project = ({ data }) => {
   const post = data.post
-  debugger
   return (
     <Layout>
+      <SEO title={post.frontmatter.title} />
       <div className="article">
         <div className="article__header">
           <h1>{post.frontmatter.title}</h1>

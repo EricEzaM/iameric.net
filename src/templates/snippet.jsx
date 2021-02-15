@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 
+import SEO from "../components/seo"
 import Layout from "../components/layout"
 import LinkList from "../components/link-list"
 import { getUrlFriendlyName } from "../utils/category-url-conversion"
@@ -9,6 +10,7 @@ const Snippet = ({ data }) => {
   const post = data.snippet
   return (
     <Layout>
+      <SEO title={post.frontmatter.title} />
       <div className="article">
         <div className="article__header">
           <h1>{post.frontmatter.title}</h1>
