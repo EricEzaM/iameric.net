@@ -32,15 +32,15 @@
     cursor: pointer;
 
     a {
+      position: relative;
       transition: color 250ms ease-out;
       text-decoration: none;
+      // Underline animation on hover
+      @include underline-grow-on-hover($g-color-main);
     }
 
     & > .is-active {
       color: $g-color-main;
     }
-
-    // Underline animation on hover
-    @include underline-grow-on-hover($g-color-main);
   }
 }
