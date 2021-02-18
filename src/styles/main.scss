@@ -13,10 +13,11 @@
 
 @import "pages/page-common";
 @import "pages/index";
-@import "pages/article";
-@import "pages/project";
 @import "pages/articles";
 @import "pages/snippets";
+
+@import "templates/post-common";
+@import "templates/project";
 
 @import "themes/prism-theme";
 

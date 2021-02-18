@@ -11,19 +11,19 @@ const Snippet = ({ data }) => {
   return (
     <Layout>
       <SEO title={post.frontmatter.title} />
-      <div className="article">
-        <div className="article__header">
+      <div className="post">
+        <div className="post__header">
           <h1>{post.frontmatter.title}</h1>
-          <div className="article__meta">
+          <div className="post__meta">
             <LinkList
               titles={[post.frontmatter.category]}
               links={["snippets?category=" + getUrlFriendlyName(post.frontmatter.category)]}
             />
-            <time>Published {post.frontmatter.date}</time>
+            <time>{post.frontmatter.date}</time>
           </div>
         </div>
         <div
-          className="article__body"
+          className="post__body"
           dangerouslySetInnerHTML={{ __html: post.html }}
         ></div>
       </div>

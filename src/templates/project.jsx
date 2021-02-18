@@ -13,8 +13,8 @@ const Project = ({ data }) => {
   return (
     <Layout>
       <SEO title={post.frontmatter.title} />
-      <div className="article">
-        <div className="article__header">
+      <div className="post">
+        <div className="post__header">
           <h1>{post.frontmatter.title}</h1>
           <div className="project__links">
             {post.frontmatter.url != null &&
@@ -26,11 +26,11 @@ const Project = ({ data }) => {
             {post.frontmatter.github != null &&
               <a href={post.frontmatter.github}>
                 GitHub
-              <ExternalLinkIcon style={{ fill: "#ffffff" }} />
+                <ExternalLinkIcon style={{ fill: "#ffffff" }} />
               </a>
             }
           </div>
-          <div className="article__meta">
+          <div className="post__meta">
             <LinkList
               titles={post.frontmatter.tags}
               links={post.frontmatter.tags.map(e => "projects?tags=" + getUrlFriendlyName(e))}
@@ -45,7 +45,7 @@ const Project = ({ data }) => {
           />
         </div>
         <div
-          className="article__body"
+          className="post__body"
           dangerouslySetInnerHTML={{ __html: post.html }}
         ></div>
       </div>
