@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { graphql, Link, useStaticQuery } from "gatsby"
-import Img from "gatsby-image"
+import { graphql, useStaticQuery } from "gatsby"
 import {
   useQueryParam,
   ArrayParam,
@@ -8,7 +7,7 @@ import {
   withDefault,
 } from "use-query-params"
 
-import LinkList from "../components/link-list";
+import ArtcileCard from "../components/cards/article-card"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { getUrlFriendlyName } from "../utils/category-url-conversion"
@@ -120,23 +119,8 @@ const ArticlesPage = () => {
         </div>
       </section>
       <section className="card-container">
-        {displayedArticles.map(({ article: a }) => (
-          <div className="card" key={a.id}>
-            <Link to={a.frontmatter.slug}>
-              <Img
-                className={"card__image"}
-                fluid={{ ...a.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
-                alt={`Image for ${a.frontmatter.title}`}
-                imgStyle={{
-                  objectPosition: "top center"
-                }}
-              />
-              <h3 className={"card__title"}>{a.frontmatter.title}</h3>
-              <div className={"card__body"}>{a.excerpt}</div>
-            </Link>
-            <time className={"card__date"}>{a.frontmatter.date}</time>
-            <LinkList titles={a.frontmatter.tags} links={a.frontmatter.tags.map(t => "articles?tags=" + getUrlFriendlyName(t))} />
-          </div>
+        {displayedArticles.map(({ article }) => (
+          <ArtcileCard article={ article } key={ article.id}/>
         ))}
       </section>
     </Layout>
@@ -154,20 +138,7 @@ const query = graphql`
       edges {
         article: node {
           id
-          frontmatter {
-            title
-            tags
-            slug
-            headerImage {
-              childImageSharp {
-                fluid(quality: 100) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-            date(formatString: "MMMM Do, YYYY")
-          }
-          excerpt(pruneLength: 150)
+          ...ArticleCardInfo
         }
       }
     }

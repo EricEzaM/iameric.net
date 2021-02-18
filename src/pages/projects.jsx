@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react"
-import { graphql, useStaticQuery, Link } from "gatsby"
-import Img from "gatsby-image"
+import { graphql, useStaticQuery } from "gatsby"
 import { useQueryParam, withDefault, ArrayParam } from "use-query-params"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import LinkList from "../components/link-list"
 import { getUrlFriendlyName } from "../utils/category-url-conversion"
 import ButtonGroup from "../components/button-group"
+import ProjectCard from "../components/cards/project-card";
 
 const ProjectsPage = () =>
 {
@@ -62,23 +61,8 @@ const ProjectsPage = () =>
         />
       </aside>
       <section className="card-container">
-        {displayedProjects.map(({ project: p }) => (
-          <div className="card" key={p.id}>
-            <Link to={p.frontmatter.slug}>
-              <Img
-                className={"card__image"}
-                fluid={{ ...p.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
-                alt={`Image for ${p.frontmatter.title}`}
-                imgStyle={{
-                  objectPosition: "top center"
-                }}
-              />
-              <h3 className={"card__title"}>{p.frontmatter.title}</h3>
-              <div className={"card__body"}>{p.frontmatter.blurb}</div>
-            </Link>
-            <time className={"card__date"}>{p.frontmatter.date}</time>
-            <LinkList titles={p.frontmatter.tags} links={p.frontmatter.tags.map(t => "projects?tags=" + getUrlFriendlyName(t))} />
-          </div>
+        {displayedProjects.map(({ project }) => (
+          <ProjectCard project={ project } key={ project.id }/>
         ))}
       </section>
     </Layout>
@@ -96,20 +80,7 @@ const query = graphql`
       edges {
         project: node {
           id
-          frontmatter {
-            title
-            slug
-            tags
-            headerImage {
-              childImageSharp {
-                fluid(quality: 100) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-            blurb
-            date(formatString: "MMMM YYYY")
-          }
+          ...ProjectCardInfo
         }
       }
     }

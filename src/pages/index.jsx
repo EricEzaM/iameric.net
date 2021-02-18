@@ -1,11 +1,11 @@
 import React from "react"
 import { graphql, Link, useStaticQuery } from "gatsby"
-import Img from "gatsby-image"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import LinkList from "../components/link-list"
-import { getUrlFriendlyName } from "../utils/category-url-conversion"
+import ArticleCard from "../components/cards/article-card"
+import ProjectCard from "../components/cards/project-card"
+import SnippetCard from "../components/cards/snippet-card"
 
 const IndexPage = () => {
   const { articles, snippets, projects } = useStaticQuery(query)
@@ -29,23 +29,8 @@ const IndexPage = () => {
           </Link>
         </div>
         <div className="card-container">
-          {articles.edges.map(({ article: a }) => (
-            <div className="card" key={a.id}>
-              <Link to={`articles/${a.frontmatter.slug}`}>
-                <Img
-                  className={"card__image"}
-                  fluid={{ ...a.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
-                  alt={`Image for ${a.frontmatter.title}`}
-                  imgStyle={{
-                    objectPosition: "top center"
-                  }}
-                />
-                <h3 className={"card__title"}>{a.frontmatter.title}</h3>
-                <div className={"card__body"}>{a.excerpt}</div>
-              </Link>
-              <time className={"card__date"}>{a.frontmatter.date}</time>
-              <LinkList titles={a.frontmatter.tags} links={a.frontmatter.tags.map(t => "articles?tags=" + getUrlFriendlyName(t))} />
-            </div>
+          {articles.edges.map(({ article }) => (
+            <ArticleCard article={article} key={ article.id }/>
           ))}
         </div>
       </section>
@@ -58,23 +43,8 @@ const IndexPage = () => {
           </Link>
         </div>
         <div className="card-container">
-          {projects.edges.map(({ project: p }) => (
-            <div className="card" key={p.id}>
-              <Link to={`projects/${p.frontmatter.slug}`}>
-                <Img
-                  className={"card__image"}
-                  fluid={{ ...p.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
-                  alt={`Image for ${p.frontmatter.title}`}
-                  imgStyle={{
-                    objectPosition: "top center"
-                  }}
-                />
-                <h3 className={"card__title"}>{p.frontmatter.title}</h3>
-                <div className={"card__body"}>{p.excerpt}</div>
-              </Link>
-              <time className={"card__date"}>{p.frontmatter.date}</time>
-              <LinkList titles={p.frontmatter.tags} links={p.frontmatter.tags.map(t => "articles?tags=" + getUrlFriendlyName(t))} />
-            </div>
+          {projects.edges.map(({ project }) => (
+            <ProjectCard project={project} key={ project.id }/>
           ))}
         </div>
       </section>
@@ -88,26 +58,8 @@ const IndexPage = () => {
         </div>
         <div className="card-container--vertical">
             {snippets.edges.map(
-              ({ snippet: s }) => (
-                <div className="card card--narrow" key={s.id}>
-                  <Link
-                    to={`snippets/${s.frontmatter.slug}`}
-                    className="card__content card__content--vertical"
-                  >
-                  <Img
-                    className={"card__image--vertical"}
-                    fluid={{ ...s.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
-                      alt={`Image for ${s.frontmatter.title}`}
-                      imgStyle={{
-                        objectPosition: "top center"
-                      }}
-                  />
-                  <div>
-                    <h3 className={"card__title card__title--vertical"}>{s.frontmatter.title}</h3>
-                    <time className={"card__date"}>{s.frontmatter.date}</time>
-                  </div>
-                </Link>
-              </div>
+              ({ snippet }) => (
+                <SnippetCard snippet={snippet} key={ snippet.id }/>
             )
           )}
         </div>
@@ -128,20 +80,7 @@ const query = graphql`
       edges {
         article: node {
           id
-          frontmatter {
-            title
-            tags
-            slug
-            headerImage {
-              childImageSharp {
-                fluid(quality: 100) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-            date(formatString: "MMMM Do, YYYY")
-          }
-          excerpt(pruneLength: 150)
+          ...ArticleCardInfo
         }
       }
     }
@@ -153,20 +92,7 @@ const query = graphql`
       edges {
         snippet: node {
           id
-          frontmatter {
-            title
-            slug
-            category
-            headerImage {
-              childImageSharp {
-                fluid(quality: 100){
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-            date(formatString: "MMMM Do, YYYY")
-          }
-          excerpt(pruneLength: 200)
+          ...SnippetCardInfo
         }
       }
     }
@@ -178,20 +104,7 @@ const query = graphql`
       edges {
         project: node {
           id
-            frontmatter {
-              title
-              slug
-              tags
-              headerImage {
-                childImageSharp {
-                  fluid(quality: 100) {
-                    ...GatsbyImageSharpFluid
-                  }
-                }
-              }
-              date(formatString: "MMMM YYYY")
-            }
-            excerpt(pruneLength: 150)
+          ...ProjectCardInfo
         }
       }
     }

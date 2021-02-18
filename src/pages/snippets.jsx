@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react"
-import { graphql, useStaticQuery, Link } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import { useQueryParam, StringParam, withDefault } from "use-query-params"
-import Img from "gatsby-image"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import ButtonGroup from "../components/button-group"
 import { getUrlFriendlyName } from "../utils/category-url-conversion"
+import SnippetCard from "../components/cards/snippet-card"
 
 const SnippetsPage = () => {
   const { snippets, categories } = useStaticQuery(query)
@@ -62,23 +62,8 @@ const SnippetsPage = () => {
         </aside>
         <section className="card-container--vertical">
           {displayedSnippets.map(
-            ({ snippet: s }) => (
-              <div className="card card--narrow" key={s.id}>
-                <Link
-                  to={s.frontmatter.slug}
-                  className="card__content card__content--vertical"
-                >
-                  <Img
-                    className={"card__image--vertical"}
-                    fluid={{ ...s.frontmatter.headerImage.childImageSharp.fluid, aspectRatio: 2 }}
-                    alt={ `Image for ${s.frontmatter.title}` }
-                  />
-                  <div>
-                    <h3 className={"card__title card__title--vertical"}>{s.frontmatter.title}</h3>
-                    <time className={"card__date"}>{s.frontmatter.date}</time>
-                  </div>
-                </Link>
-              </div>
+            ({ snippet }) => (
+              <SnippetCard snippet={ snippet } key={ snippet.id }/>
             )
           )}
         </section>
@@ -98,20 +83,7 @@ const query = graphql`
       edges {
         snippet: node {
           id
-          frontmatter {
-            title
-            slug
-            category
-            headerImage {
-              childImageSharp {
-                fluid(quality: 100){
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-            date(formatString: "MMMM Do, YYYY")
-          }
-          excerpt(pruneLength: 200)
+          ...SnippetCardInfo
         }
       }
     }
