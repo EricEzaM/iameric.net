@@ -27,8 +27,19 @@
     justify-content: space-between;
     margin-top: 0.5rem;
 
-    p {
-      margin: 0;
+    // Ensure the 2 children don't fight for space when placed horizontally.
+    > * {
+      max-width: 50%;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      flex-direction: column;
+      text-align: center;
+
+      > * {
+        margin: 0 auto;
+        max-width: 100%;
+      }
     }
   }
 
