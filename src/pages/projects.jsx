@@ -49,7 +49,7 @@ const ProjectsPage = () =>
   return (
     <Layout>
       <SEO title="Projects" />
-      <aside className="filters-container">
+      <aside className="page__filters-container">
         <ButtonGroup
           items={tags.group.map(t =>
           ({

@@ -14,15 +14,15 @@ const IndexPage = () => {
     <Layout>
       <SEO title="Home" />
 
-      <h3 className="subtitle">
+      <h3 className="page__subtitle">
         A mechanical engineer who loves programming.
       </h3>
-      <div>
+      <div className="page__subtext">
         This website is a programming notebook of sorts - a place for me to document things I have learned that might be useful in the future, as well as showcase some of my projects. If someone out there finds what I create or write about useful too, then that is just an added bonus!
       </div>
 
       <section>
-        <div className="section-title">
+        <div className="section__title">
           <h2>Latest Articles</h2>
           <Link to={"articles"}>
             <h4>View All</h4>
@@ -36,7 +36,7 @@ const IndexPage = () => {
       </section>
 
       <section>
-        <div className="section-title">
+        <div className="section__title">
           <h2>Latest Projects</h2>
           <Link to={"projects"}>
             <h4>View All</h4>
@@ -50,7 +50,7 @@ const IndexPage = () => {
       </section>
 
       <section>
-        <div className="section-title">
+        <div className="section__title">
           <h2>Latest Snippets</h2>
           <Link to={"snippets"}>
             <h4>View All</h4>

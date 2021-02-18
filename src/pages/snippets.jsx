@@ -42,13 +42,13 @@ const SnippetsPage = () => {
     <Layout>
       <SEO title="Snippets" />
 
-      <div>
+      <div className="page__subtext">
         Pieces of code which don't fit the longer format of artciles. Kind of like Github Gists, but they can include some paragraph content for additional context, and be categorised.
       </div>
 
-      <div className="snippets-page-container">
+      <div>
         {/* Aside is inside div so that it's height is independent of section height */}
-        <aside className="filters-container">
+        <aside className="page__filters-container">
           <ButtonGroup
             items={cats.map(c =>
             ({

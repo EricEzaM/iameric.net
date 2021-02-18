@@ -86,10 +86,10 @@ const ArticlesPage = () => {
   return (
     <Layout>
       <SEO title="Articles" />
-      <section className="filters-container">
-        <div className="searchbar">
+      <section className="page__filters-container">
+        <div className="articles__searchbar">
           <input
-            className="searchbox"
+            className="articles__searchbox"
             type="text"
             placeholder="Search"
             value={filterTerm}
@@ -99,7 +99,7 @@ const ArticlesPage = () => {
             }
           />
           <button className={[
-              "tags-button",
+              "articles__tags-button",
               showTags ? "active" : "",
             ].join(" ")}
             onClick={ e => setShowTags(!showTags) }
@@ -108,7 +108,7 @@ const ArticlesPage = () => {
           </button>
         </div>
         <div className={[
-              "tags-list",
+              "articles__tags-container",
               showTags ? "active" : "",
             ].join(" ")}>
           <ButtonGroup
