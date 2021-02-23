@@ -46,10 +46,6 @@ hr {
   border: 1px solid $g-color-main;
 }
 
-vl {
-  border: 1px solid $g-color-tag;
-}
-
 blockquote {
   padding: 5px 10px;
   margin: 0 2.5%;
@@ -97,6 +93,26 @@ h3,
 h4,
 h5 {
   color: $g-color-grey-darker;
+}
+
+h1 {
+  font-size: 1.6em;
+}
+
+h2 {
+  font-size: 1.4em;
+}
+
+h3 {
+  font-size: 1.2em;
+}
+
+h4 {
+  font-size: 1.1em;
+}
+
+h5 {
+  font-size: 1.0em;
 }
 
 p,
