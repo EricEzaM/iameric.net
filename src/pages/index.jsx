@@ -18,50 +18,51 @@ const IndexPage = () => {
         A mechanical engineer who loves programming.
       </h3>
       <div className="page__subtext">
-        This website is a programming notebook of sorts - a place for me to document things I have learned that might be useful in the future, as well as showcase some of my projects. If someone out there finds what I create or write about useful too, then that is just an added bonus!
+        This website is a programming notebook of sorts - a place for me to
+        document things I have learned that might be useful in the future, as
+        well as showcase some of my projects. If someone out there finds what I
+        create or write about useful too, then that is just an added bonus!
       </div>
 
       <section>
         <div className="section__title">
-          <h2>Latest Articles</h2>
+          <h1>Latest Articles</h1>
           <Link to={"articles"}>
             <h4>View All</h4>
           </Link>
         </div>
         <div className="card-container">
           {articles.edges.map(({ article }) => (
-            <ArticleCard article={article} key={ article.id }/>
+            <ArticleCard article={article} key={article.id} />
           ))}
         </div>
       </section>
 
       <section>
         <div className="section__title">
-          <h2>Latest Projects</h2>
+          <h1>Latest Projects</h1>
           <Link to={"projects"}>
             <h4>View All</h4>
           </Link>
         </div>
         <div className="card-container">
           {projects.edges.map(({ project }) => (
-            <ProjectCard project={project} key={ project.id }/>
+            <ProjectCard project={project} key={project.id} />
           ))}
         </div>
       </section>
 
       <section>
         <div className="section__title">
-          <h2>Latest Snippets</h2>
+          <h1>Latest Snippets</h1>
           <Link to={"snippets"}>
             <h4>View All</h4>
           </Link>
         </div>
         <div className="card-container--vertical">
-            {snippets.edges.map(
-              ({ snippet }) => (
-                <SnippetCard snippet={snippet} key={ snippet.id }/>
-            )
-          )}
+          {snippets.edges.map(({ snippet }) => (
+            <SnippetCard snippet={snippet} key={snippet.id} />
+          ))}
         </div>
       </section>
     </Layout>
@@ -96,7 +97,7 @@ const query = graphql`
         }
       }
     }
-    projects: allMarkdownRemark (
+    projects: allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }
       filter: { frontmatter: { template: { eq: "project" } } }
       limit: 3
