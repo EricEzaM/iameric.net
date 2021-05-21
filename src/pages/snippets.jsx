@@ -29,8 +29,7 @@ const SnippetsPage = () => {
     setDisplayedSnippets(filteredSnippets)
   }, [category, snippets])
 
-  function onCategoryClicked(clickedCategory)
-  {
+  function onCategoryClicked(clickedCategory) {
     if (clickedCategory === category) {
       setCategory(undefined)
     } else {
@@ -43,29 +42,27 @@ const SnippetsPage = () => {
       <SEO title="Snippets" />
 
       <div className="page__subtext">
-        Pieces of code which don't fit the longer format of artciles. Kind of like Github Gists, but they can include some paragraph content for additional context, and be categorised.
+        Pieces of code which don't fit the longer format of articles. Kind of
+        like Github Gists, but they can include some paragraph content for
+        additional context, and be categorised.
       </div>
 
       <div>
         {/* Aside is inside div so that it's height is independent of section height */}
         <aside className="page__filters-container">
           <ButtonGroup
-            items={cats.map(c =>
-            ({
+            items={cats.map(c => ({
               id: getUrlFriendlyName(c.fieldValue),
-              text: c.fieldValue
+              text: c.fieldValue,
             }))}
             selectedItems={[category]}
             onButtonClicked={id => onCategoryClicked(id)}
-          >
-          </ButtonGroup>
+          ></ButtonGroup>
         </aside>
         <section className="card-container--vertical">
-          {displayedSnippets.map(
-            ({ snippet }) => (
-              <SnippetCard snippet={ snippet } key={ snippet.id }/>
-            )
-          )}
+          {displayedSnippets.map(({ snippet }) => (
+            <SnippetCard snippet={snippet} key={snippet.id} />
+          ))}
         </section>
       </div>
     </Layout>
@@ -78,7 +75,9 @@ const query = graphql`
   query {
     snippets: allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }
-      filter: { frontmatter: { template: { eq: "snippet" } } }
+      filter: {
+        frontmatter: { template: { eq: "snippet" }, published: { ne: false } }
+      }
     ) {
       edges {
         snippet: node {

@@ -23,8 +23,7 @@ const ArticlesPage = () => {
       text: `${tag.fieldValue} (${tag.totalCount})`,
     }))
     // Sort alphabetically
-    .sort((a, b) =>
-    {
+    .sort((a, b) => {
       let atag = a.text.toLowerCase()
       let btag = b.text.toLowerCase()
       if (atag < btag) return -1
@@ -44,8 +43,7 @@ const ArticlesPage = () => {
     withDefault(ArrayParam, [])
   )
 
-  useEffect(() =>
-  {
+  useEffect(() => {
     // Filter Term
     let filteredArticles = articles.edges.filter(({ article }) => {
       return article.frontmatter.title
@@ -54,10 +52,15 @@ const ArticlesPage = () => {
     })
 
     // Filter Tags
-    filteredArticles = filteredArticles.filter(({ article }) =>
-    {
-      let articleTags = article.frontmatter.tags.map(tag => getUrlFriendlyName(tag))
-      return articleTags.some(t => selectedTags.includes(t)) || selectedTags === undefined || selectedTags.length === 0
+    filteredArticles = filteredArticles.filter(({ article }) => {
+      let articleTags = article.frontmatter.tags.map(tag =>
+        getUrlFriendlyName(tag)
+      )
+      return (
+        articleTags.some(t => selectedTags.includes(t)) ||
+        selectedTags === undefined ||
+        selectedTags.length === 0
+      )
     })
 
     setDisplayedArticles(filteredArticles)
@@ -67,18 +70,15 @@ const ArticlesPage = () => {
     }
   }, [filterTerm, selectedTags, articles])
 
-  function onTagClicked(tagId)
-  {
+  function onTagClicked(tagId) {
     if (selectedTags.includes(tagId)) {
       let newTags = selectedTags.filter(t => t !== tagId)
       if (newTags.length > 0) {
         setSelectedTags(newTags)
-      }
-      else {
+      } else {
         setSelectedTags(undefined)
       }
-    }
-    else {
+    } else {
       setSelectedTags([...selectedTags, tagId])
     }
   }
@@ -98,19 +98,21 @@ const ArticlesPage = () => {
               setFilterTerm(e.target.value === "" ? undefined : e.target.value)
             }
           />
-          <button className={[
-              "articles__tags-button",
-              showTags ? "active" : "",
-            ].join(" ")}
-            onClick={ e => setShowTags(!showTags) }
+          <button
+            className={["articles__tags-button", showTags ? "active" : ""].join(
+              " "
+            )}
+            onClick={e => setShowTags(!showTags)}
           >
-            { showTags ? "Hide Tags" : "Show Tags" }
+            {showTags ? "Hide Tags" : "Show Tags"}
           </button>
         </div>
-        <div className={[
-              "articles__tags-container",
-              showTags ? "active" : "",
-            ].join(" ")}>
+        <div
+          className={[
+            "articles__tags-container",
+            showTags ? "active" : "",
+          ].join(" ")}
+        >
           <ButtonGroup
             items={tags}
             selectedItems={selectedTags}
@@ -120,7 +122,7 @@ const ArticlesPage = () => {
       </section>
       <section className="card-container">
         {displayedArticles.map(({ article }) => (
-          <ArtcileCard article={ article } key={ article.id}/>
+          <ArtcileCard article={article} key={article.id} />
         ))}
       </section>
     </Layout>
@@ -133,7 +135,9 @@ const query = graphql`
   query {
     articles: allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }
-      filter: { frontmatter: { template: { eq: "article" } } }
+      filter: {
+        frontmatter: { template: { eq: "article" }, published: { ne: false } }
+      }
     ) {
       edges {
         article: node {
@@ -142,10 +146,12 @@ const query = graphql`
         }
       }
     }
-    tags: allMarkdownRemark (
-      filter: { frontmatter: { template: {eq : "article"} } } 
+    tags: allMarkdownRemark(
+      filter: {
+        frontmatter: { template: { eq: "article" }, published: { ne: false } }
+      }
     ) {
-      group(field: frontmatter___tags){
+      group(field: frontmatter___tags) {
         fieldValue
         totalCount
       }

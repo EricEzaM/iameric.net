@@ -75,7 +75,9 @@ const query = graphql`
   query {
     articles: allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }
-      filter: { frontmatter: { template: { eq: "article" } } }
+      filter: {
+        frontmatter: { template: { eq: "article" }, published: { ne: false } }
+      }
       limit: 3
     ) {
       edges {
@@ -87,7 +89,9 @@ const query = graphql`
     }
     snippets: allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }
-      filter: { frontmatter: { template: { eq: "snippet" } } }
+      filter: {
+        frontmatter: { template: { eq: "snippet" }, published: { ne: false } }
+      }
       limit: 3
     ) {
       edges {
@@ -99,7 +103,9 @@ const query = graphql`
     }
     projects: allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }
-      filter: { frontmatter: { template: { eq: "project" } } }
+      filter: {
+        frontmatter: { template: { eq: "project" }, published: { ne: false } }
+      }
       limit: 3
     ) {
       edges {

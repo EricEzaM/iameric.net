@@ -6,10 +6,9 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { getUrlFriendlyName } from "../utils/category-url-conversion"
 import ButtonGroup from "../components/button-group"
-import ProjectCard from "../components/cards/project-card";
+import ProjectCard from "../components/cards/project-card"
 
-const ProjectsPage = () =>
-{
+const ProjectsPage = () => {
   const { projects, tags } = useStaticQuery(query)
 
   const [displayedProjects, setDisplayedProjects] = useState(projects.edges)
@@ -19,29 +18,29 @@ const ProjectsPage = () =>
   )
 
   useEffect(() => {
-    let filteredProjects = projects.edges.filter(({ project }) =>
-    {
-      let projectTags = project.frontmatter.tags.map(tag => getUrlFriendlyName(tag))
-      return projectTags.some(t => selectedTags.includes(t)) || selectedTags === undefined || selectedTags.length === 0
+    let filteredProjects = projects.edges.filter(({ project }) => {
+      let projectTags = project.frontmatter.tags.map(tag =>
+        getUrlFriendlyName(tag)
+      )
+      return (
+        projectTags.some(t => selectedTags.includes(t)) ||
+        selectedTags === undefined ||
+        selectedTags.length === 0
+      )
     })
 
     setDisplayedProjects(filteredProjects)
   }, [selectedTags, projects])
 
-  function onTagClicked(tag)
-  {
-    if (selectedTags.includes(tag))
-    {
+  function onTagClicked(tag) {
+    if (selectedTags.includes(tag)) {
       let newTags = selectedTags.filter(t => t !== tag)
       if (newTags.length > 0) {
         setSelectedTags(newTags)
-      }
-      else {
+      } else {
         setSelectedTags(undefined)
       }
-    }
-    else
-    {
+    } else {
       setSelectedTags([...selectedTags, tag])
     }
   }
@@ -51,10 +50,9 @@ const ProjectsPage = () =>
       <SEO title="Projects" />
       <aside className="page__filters-container">
         <ButtonGroup
-          items={tags.group.map(t =>
-          ({
+          items={tags.group.map(t => ({
             id: getUrlFriendlyName(t.fieldValue),
-            text: t.fieldValue
+            text: t.fieldValue,
           }))}
           selectedItems={selectedTags}
           onButtonClicked={id => onTagClicked(id)}
@@ -62,7 +60,7 @@ const ProjectsPage = () =>
       </aside>
       <section className="card-container">
         {displayedProjects.map(({ project }) => (
-          <ProjectCard project={ project } key={ project.id }/>
+          <ProjectCard project={project} key={project.id} />
         ))}
       </section>
     </Layout>
@@ -75,7 +73,9 @@ const query = graphql`
   query {
     projects: allMarkdownRemark(
       sort: { fields: frontmatter___date, order: DESC }
-      filter: { frontmatter: { template: { eq: "project" } } }
+      filter: {
+        frontmatter: { template: { eq: "project" }, published: { ne: false } }
+      }
     ) {
       edges {
         project: node {
@@ -84,10 +84,12 @@ const query = graphql`
         }
       }
     }
-    tags: allMarkdownRemark (
-      filter: { frontmatter: { template: {eq : "project"} } } 
+    tags: allMarkdownRemark(
+      filter: {
+        frontmatter: { template: { eq: "project" }, published: { ne: false } }
+      }
     ) {
-      group(field: frontmatter___tags){
+      group(field: frontmatter___tags) {
         fieldValue
         totalCount
       }

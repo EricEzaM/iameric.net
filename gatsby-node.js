@@ -26,6 +26,7 @@ exports.createPages = async ({ graphql, actions }) => {
               template
               slug
               category
+              published
             }
           }
         }
@@ -40,13 +41,19 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const allMarkdown = result.data.allMarkdownRemark.edges
   const articles = allMarkdown.filter(
-    ({ node }) => node.frontmatter.template == "article"
+    ({ node }) =>
+      node.frontmatter.template == "article" &&
+      node.frontmatter.published != false
   )
   const snippets = allMarkdown.filter(
-    ({ node }) => node.frontmatter.template == "snippet"
+    ({ node }) =>
+      node.frontmatter.template == "snippet" &&
+      node.frontmatter.published != false
   )
   const projects = allMarkdown.filter(
-    ({ node }) => node.frontmatter.template == "project"
+    ({ node }) =>
+      node.frontmatter.template == "project" &&
+      node.frontmatter.published != false
   )
 
   articles.forEach(article => {
@@ -68,8 +75,8 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `projects/${slug}`,
       component: projectTemplate,
       context: {
-        slug: slug
-      }
+        slug: slug,
+      },
     })
   })
 
@@ -86,21 +93,4 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
-}
-
-exports.createSchemaCustomization = ({ actions }) =>
-{
-  const { createTypes } = actions
-  const typeDefs = `
-    type MarkdownRemark implements Node {
-      frontmatter: Frontmatter
-    }
-
-    type Frontmatter {
-      url: String
-      github: String
-    }
-  `
-
-  createTypes(typeDefs)
 }
