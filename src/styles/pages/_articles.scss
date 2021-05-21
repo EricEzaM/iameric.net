@@ -8,7 +8,7 @@
   padding: 5px 2.5em;
   min-height: 30px;
   margin-right: 0.5em;
-  
+
   border-radius: 5px;
   border: solid 1px $g-color-grey-dark;
   background-color: $g-color-white;
@@ -22,7 +22,12 @@
 }
 
 .articles__tags-button {
-  @include button($g-color-grey-dark, $g-color-light-grey, $g-color-grey-dark, $g-color-white);
+  @include button(
+    $g-color-grey-dark,
+    $g-color-light-grey,
+    $g-color-grey-dark,
+    $g-color-white
+  );
 
   min-width: 8em; // To avoid changes in width when switching text
   text-align: center;
@@ -32,7 +37,7 @@
 .articles__tags-container {
   @extend .page__filters-container;
   display: none;
-  
+
   &.active {
     display: block;
   }

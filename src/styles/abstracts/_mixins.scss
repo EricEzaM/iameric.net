@@ -20,7 +20,7 @@
   }
 }
 
-@mixin button($color1, $color2, $inactive-text-color, $active-text-color){
+@mixin button($color1, $color2, $inactive-text-color, $active-text-color) {
   padding: 5px 20px;
   font-weight: bold;
   text-align: right;
@@ -34,11 +34,7 @@
   border-radius: $g-border-radius;
 
   // Background
-  background: linear-gradient(
-    -45deg,
-    $color2 50%,
-    $color1 50%
-  );
+  background: linear-gradient(-45deg, $color2 50%, $color1 50%);
   background-size: 250% 250%;
   background-position: 100% 50%;
 

@@ -25,7 +25,7 @@ $prism-comment: #93a19a;
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-	color: $prism-background !important;
+  color: $prism-background !important;
   background: $prism-text-base !important;
 }
 

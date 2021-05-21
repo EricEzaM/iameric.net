@@ -12,10 +12,14 @@ const AboutPage = () => {
       </h3>
       <div className="page__subtext">
         <p>
-          This site is a place for me to document some of the things I do - for myself to reference and look back on in the future, but also for others too if they find it useful.
+          This site is a place for me to document some of the things I do - for
+          myself to reference and look back on in the future, but also for
+          others too if they find it useful.
         </p>
         <p>
-          I'm based in Australia. If you would like to contact me, feel free to send me an email at <a href="mailto:eric@iameric.net">eric@iameric.net</a>.
+          I'm based in Australia. If you would like to contact me, feel free to
+          send me an email at{" "}
+          <a href="mailto:eric@iameric.net">eric@iameric.net</a>.
         </p>
       </div>
     </Layout>

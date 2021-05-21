@@ -17,30 +17,32 @@ const Project = ({ data }) => {
         <div className="post__header">
           <h1>{post.frontmatter.title}</h1>
           <div className="project__links">
-            {post.frontmatter.url != null &&
+            {post.frontmatter.url != null && (
               <a href={post.frontmatter.url}>
                 Website
                 <ExternalLinkIcon style={{ fill: "#ffffff" }} />
               </a>
-            }
-            {post.frontmatter.github != null &&
+            )}
+            {post.frontmatter.github != null && (
               <a href={post.frontmatter.github}>
                 GitHub
                 <ExternalLinkIcon style={{ fill: "#ffffff" }} />
               </a>
-            }
+            )}
           </div>
           <div className="post__meta">
             <LinkList
               titles={post.frontmatter.tags}
-              links={post.frontmatter.tags.map(e => "projects?tags=" + getUrlFriendlyName(e))}
+              links={post.frontmatter.tags.map(
+                e => "projects?tags=" + getUrlFriendlyName(e)
+              )}
             />
             <time>{post.frontmatter.date}</time>
           </div>
           <Img
             fluid={post.frontmatter.headerImage.childImageSharp.fluid}
             imgStyle={{
-              objectPosition: "top center"
+              objectPosition: "top center",
             }}
           />
         </div>
@@ -57,14 +59,16 @@ export default Project
 
 export const query = graphql`
   query($slug: String!) {
-    post: markdownRemark(frontmatter: { slug: { eq: $slug }, template: { eq: "project"} }) {
+    post: markdownRemark(
+      frontmatter: { slug: { eq: $slug }, template: { eq: "project" } }
+    ) {
       html
       frontmatter {
         title
         date(formatString: "MMMM YYYY")
         tags
-        url,
-        github,
+        url
+        github
         headerImage {
           childImageSharp {
             fluid(quality: 100) {

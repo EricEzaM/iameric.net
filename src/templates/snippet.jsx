@@ -17,7 +17,10 @@ const Snippet = ({ data }) => {
           <div className="post__meta">
             <LinkList
               titles={[post.frontmatter.category]}
-              links={["snippets?category=" + getUrlFriendlyName(post.frontmatter.category)]}
+              links={[
+                "snippets?category=" +
+                  getUrlFriendlyName(post.frontmatter.category),
+              ]}
             />
             <time>{post.frontmatter.date}</time>
           </div>

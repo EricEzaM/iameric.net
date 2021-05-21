@@ -18,14 +18,16 @@ const Article = ({ data }) => {
           <div className="post__meta">
             <LinkList
               titles={post.frontmatter.tags}
-              links={post.frontmatter.tags.map(e => "articles?tags=" + getUrlFriendlyName(e))}
+              links={post.frontmatter.tags.map(
+                e => "articles?tags=" + getUrlFriendlyName(e)
+              )}
             />
             <time>{post.frontmatter.date}</time>
           </div>
           <Img
             fluid={post.frontmatter.headerImage.childImageSharp.fluid}
             imgStyle={{
-              objectPosition: "top center"
+              objectPosition: "top center",
             }}
           />
         </div>

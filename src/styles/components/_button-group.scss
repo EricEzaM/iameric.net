@@ -11,7 +11,12 @@ $gap: 0.5em;
   // width: calc(100% + #{$gap});
 
   &__item {
-    @include button($g-color-main, $g-color-main-light, $g-color-main, $g-color-white);
+    @include button(
+      $g-color-main,
+      $g-color-main-light,
+      $g-color-main,
+      $g-color-white
+    );
     margin: $gap 0 0 $gap;
   }
 }

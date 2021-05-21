@@ -29,13 +29,13 @@ const Layout = ({ children }) => {
         <footer>
           <div className="footer-links">
             <a href="mailto:eric@iameric.net" title="Send me an email">
-              <MailIcon/>
+              <MailIcon />
             </a>
             <a href="https://github.com/EricEzaM" title="View my Github">
-              <GithubIcon/>
+              <GithubIcon />
             </a>
             <a href="https://www.gatsbyjs.com/" title="Built with GatsbyJS">
-              <GatsbyIcon/>
+              <GatsbyIcon />
             </a>
           </div>
           © {new Date().getFullYear()}

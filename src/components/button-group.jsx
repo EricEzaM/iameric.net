@@ -16,15 +16,14 @@ import React from "react"
 const ButtonGroup = ({
   items = {
     id: "",
-    text: ""
+    text: "",
   },
   selectedItems = [""],
-  onButtonClicked = (id) => { } }) =>
-{
+  onButtonClicked = id => {},
+}) => {
   return (
     <div className="button-group">
-      {items.map(({ id, text }) =>
-      (
+      {items.map(({ id, text }) => (
         <button
           className={[
             "button-group__item",
