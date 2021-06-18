@@ -5,6 +5,25 @@ module.exports = {
     author: `Eric Michaels`,
   },
   plugins: [
+    // Google Analytics / gtag
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        // You can add multiple tracking ids and a pageview event will be fired for all of them.
+        trackingIds: [
+          "G-TEW7XD5C6C", // Google Analytics / GA
+        ],
+        // This object gets passed directly to the gtag config command
+        // This config will be shared across all trackingIds
+        gtagConfig: {
+          anonymize_ip: true,
+        },
+        // This object is used for configuration specific to this plugin
+        pluginConfig: {
+          respectDNT: false,
+        },
+      },
+    },
     `gatsby-plugin-react-helmet`,
     // Sass/Scss support
     `gatsby-plugin-sass`,
